@@ -1,8 +1,7 @@
 # CURRENT TASK
 
-**Phase 2 — Desktop application foundation.**
+**Phase 3 — Farming Atlas.**
 
-Objective: Rust core settings/bridge/lua-parser/diagnostics + Tauri commands
-(detect_wow, sync_addon, settings, diagnostics) + React shell (Settings page,
-sync UI, freshness states, diagnostics view, error/loading/empty coverage).
-Validate: frontend suite + schema; Rust in CI. Then commit.
+Objective: seed provider + atlas service (tree, search, zone detail, clustered
+observations, stats) + Atlas UI (browser, filters, density map, route handoff).
+Validate: frontend suite + rust syntax gate; Rust tests in CI. Then commit.

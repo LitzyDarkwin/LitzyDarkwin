@@ -84,7 +84,7 @@ mod tests {
         let tables: Vec<String> = conn
             .prepare("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name")
             .unwrap()
-            .query_map([], |r| r.get(0))
+            .query_map(rusqlite::params![], |r| r.get(0))
             .unwrap()
             .collect::<std::result::Result<_, _>>()
             .unwrap();

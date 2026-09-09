@@ -28,12 +28,24 @@ npm run tauri:build    # vite build + tauri build
 
 # addon checks (no WoW client needed)
 scripts/check-lua.sh
-lua5.1 tests/lua/run_tests.lua
+lua5.1 tests/lua/run_tests.lua   # or .tools/lua51-src/lua in this sandbox
+
+# rust syntax gate (sandbox only; needs: pip install tree-sitter tree-sitter-rust)
+python3 scripts/check-rust-syntax.py
 
 # schema + algorithms (no Rust needed)
 python3 scripts/validate-schema.py
 python3 scripts/verify-algorithms.py
 ```
+
+## Sandbox Lua 5.1 build (no apt, no readline headers)
+```sh
+git clone --depth 1 --branch v5.1.1 https://github.com/lua/lua.git .tools/lua51-src
+make -C .tools/lua51-src -j4 MYCFLAGS="-O2 -DLUA_USE_POSIX -DLUA_USE_DLOPEN" MYLIBS="-ldl -lm"
+# → .tools/lua51-src/lua (this mirror has no luac sources; check-lua.sh
+# falls back to loadfile-based syntax validation automatically)
+```
+`.tools/` is gitignored (local helper, not product).
 
 ## Environment assumptions
 - Windows 11 target: WebView2 (Tauri 2 prerequisite), MSVC toolchain for builds.

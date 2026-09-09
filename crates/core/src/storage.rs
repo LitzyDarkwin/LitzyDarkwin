@@ -24,8 +24,8 @@ pub fn open_db(path: &Path) -> Result<Connection> {
     Ok(conn)
 }
 
-/// Open an in-memory database with the same pragmas (tests only).
-#[cfg(any(test, feature = "test-utils"))]
+/// Open an in-memory database with the same pragmas.
+/// Intended for tests (unit + integration); harmless in production builds.
 pub fn open_memory() -> Result<Connection> {
     let conn = Connection::open_in_memory()?;
     conn.pragma_update(None, "journal_mode", "MEMORY")?;
@@ -35,7 +35,7 @@ pub fn open_memory() -> Result<Connection> {
 
 /// Read `PRAGMA user_version`.
 pub fn user_version(conn: &Connection) -> Result<u32> {
-    Ok(conn.query_row("PRAGMA user_version", [], |r| r.get(0))?)
+    Ok(conn.query_row("PRAGMA user_version", rusqlite::params![], |r| r.get(0))?)
 }
 
 /// Set `PRAGMA user_version`. Only the migration runner should call this.
@@ -56,7 +56,7 @@ mod tests {
              CREATE TABLE c(id TEXT PRIMARY KEY, p TEXT REFERENCES p(id));",
         )
         .unwrap();
-        assert!(conn.execute("INSERT INTO c VALUES ('x','missing')", []).is_err());
+        assert!(conn.execute("INSERT INTO c VALUES ('x','missing')", rusqlite::params![]).is_err());
     }
 
     #[test]

@@ -4,10 +4,10 @@
 //! HTTP fetching, and error translation. Domain commands are added per phase.
 
 use serde::Serialize;
-use std::path::PathBuf;
-use std::sync::Mutex;
+use std::path::{Path, PathBuf};
+use std::sync::{Mutex, MutexGuard};
 use tauri::{Manager, State};
-use wowgoldfarm_core::{migrations, storage};
+use wowgoldfarm_core::{bridge, diagnostics, migrations, models, settings, storage};
 
 /// Shared application state: one SQLite connection behind a mutex (rusqlite
 /// connections are `Send`, and all DB access is short + synchronous).
@@ -23,21 +23,115 @@ pub struct StatusPayload {
     pub version: String,
     pub schema_version: u32,
     pub db_path: String,
-    pub sync_state: &'static str,
+    pub sync_state: String,
 }
 
-/// Minimal Phase-0 command proving shell↔core wiring. Full command surface
-/// arrives per phase (bridge in P2, atlas P3, routes P4, market P5, …).
+fn lock_db<'a>(
+    state: &'a State<'_, AppState>,
+) -> Result<MutexGuard<'a, rusqlite::Connection>, String> {
+    state.db.lock().map_err(|e| format!("Database is busy: {e}"))
+}
+
+fn user_err(e: wowgoldfarm_core::error::AppError) -> String {
+    e.user_message()
+}
+
+/// Minimal status probe: version, schema, sync state.
 #[tauri::command]
 fn get_status(state: State<'_, AppState>) -> Result<StatusPayload, String> {
-    let db = state.db.lock().map_err(|e| format!("Database busy: {e}"))?;
-    let schema_version = storage::user_version(&db).map_err(|e| e.user_message())?;
+    let db = lock_db(&state)?;
+    let schema_version = storage::user_version(&db).map_err(user_err)?;
+    let sync_state = bridge::get_sync_state(&db, models::now_unix())
+        .map(|s| s.last_result.unwrap_or_else(|| "not_synced".to_string()))
+        .unwrap_or_else(|_| "unknown".to_string());
     Ok(StatusPayload {
         version: env!("CARGO_PKG_VERSION").to_string(),
         schema_version,
         db_path: state.db_path.to_string_lossy().to_string(),
-        sync_state: "not_synced",
+        sync_state,
     })
+}
+
+/// Probe default install locations for valid WoW installs.
+#[tauri::command]
+fn detect_wow() -> Result<Vec<bridge::WowDetection>, String> {
+    let mut found = Vec::new();
+    for candidate in bridge::candidate_wow_dirs() {
+        if let Ok(detection) = bridge::validate_wow_dir(&candidate) {
+            found.push(detection);
+        }
+    }
+    Ok(found)
+}
+
+/// Validate a user-supplied WoW directory and persist it to settings.
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn set_wow_dir(state: State<'_, AppState>, path: String) -> Result<bridge::WowDetection, String> {
+    let trimmed = path.trim();
+    if trimmed.is_empty() {
+        return Err("WoW directory path is empty.".to_string());
+    }
+    if trimmed.len() > 512 {
+        return Err("WoW directory path is too long.".to_string());
+    }
+    let detection = bridge::validate_wow_dir(Path::new(trimmed)).map_err(user_err)?;
+    let db = lock_db(&state)?;
+    let patch = settings::SettingsPatch {
+        wow_dir: Some(Some(detection.wow_dir.clone())),
+        ..Default::default()
+    };
+    settings::update_settings(&db, &patch, models::now_unix()).map_err(user_err)?;
+    Ok(detection)
+}
+
+/// Read the configured WoW dir, validate it, and sync all account SV files.
+#[tauri::command]
+fn sync_addon(state: State<'_, AppState>) -> Result<bridge::SyncReport, String> {
+    let (wow_dir, now) = {
+        let db = lock_db(&state)?;
+        let cfg = settings::get_settings(&db).map_err(user_err)?;
+        (cfg.wow_dir, models::now_unix())
+    };
+    let wow_dir = wow_dir.ok_or_else(|| {
+        "WoW directory is not configured. Detect or set it in Settings first.".to_string()
+    })?;
+    let detection = bridge::validate_wow_dir(Path::new(&wow_dir)).map_err(user_err)?;
+    let mut db = lock_db(&state)?;
+    bridge::sync_from_addon(&mut db, &detection, now).map_err(user_err)
+}
+
+#[tauri::command]
+fn get_sync_state(state: State<'_, AppState>) -> Result<bridge::SyncStateInfo, String> {
+    let db = lock_db(&state)?;
+    bridge::get_sync_state(&db, models::now_unix()).map_err(user_err)
+}
+
+#[tauri::command]
+fn get_settings(state: State<'_, AppState>) -> Result<settings::Settings, String> {
+    let db = lock_db(&state)?;
+    settings::get_settings(&db).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn update_settings(
+    state: State<'_, AppState>,
+    patch: settings::SettingsPatch,
+) -> Result<settings::Settings, String> {
+    // Re-validate an incoming WoW dir before anything is persisted.
+    if let Some(Some(dir)) = patch.wow_dir.as_ref() {
+        bridge::validate_wow_dir(Path::new(dir)).map_err(user_err)?;
+    }
+    let db = lock_db(&state)?;
+    settings::update_settings(&db, &patch, models::now_unix()).map_err(user_err)
+}
+
+#[tauri::command]
+fn get_diagnostics(state: State<'_, AppState>) -> Result<diagnostics::DiagnosticReport, String> {
+    let db = lock_db(&state)?;
+    diagnostics::collect(&db, env!("CARGO_PKG_VERSION"), &state.db_path, models::now_unix())
+        .map_err(user_err)
 }
 
 fn init_logging(app_dir: &std::path::Path) {
@@ -74,7 +168,16 @@ pub fn run() {
             app.manage(state);
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![get_status])
+        .invoke_handler(tauri::generate_handler![
+            get_status,
+            detect_wow,
+            set_wow_dir,
+            sync_addon,
+            get_sync_state,
+            get_settings,
+            update_settings,
+            get_diagnostics
+        ])
         .run(tauri::generate_context!())
         // Process entry point: nothing recoverable to do if the runtime fails.
         .expect("failed to run wowgoldfarm");

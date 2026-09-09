@@ -2,7 +2,7 @@
 
 - [x] Phase 0 — Architecture & repository foundation (checkpoint 2026-09-09)
 - [x] Phase 1 — GatherOptimizer WoW addon (checkpoint 2026-09-09)
-- [ ] Phase 2 — Desktop application foundation
+- [x] Phase 2 — Desktop application foundation (checkpoint 2026-09-09)
 - [ ] Phase 3 — Farming Atlas
 - [ ] Phase 4 — Economic route engine
 - [ ] Phase 5 — Market engine

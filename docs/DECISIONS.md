@@ -57,3 +57,8 @@ unsafe. Optional offline SV merge (WoW closed, with backup) is secondary.
 ## D12 — Crowd is local-first optional
 Interfaces + schemas + local aggregation ship; remote endpoint is config, default
 disabled. Rationale: no gratuitous cloud; MVP fully functional offline.
+
+## D13 — No file-dialog plugin; WoW path via auto-detect + validated manual input
+`tauri-plugin-dialog` (or `rfd`) would add GUI deps for one path. Auto-detect
+covers the standard install; manual entry is validated by `validate_wow_dir`
+before persisting. Simpler, testable, fewer failure modes.

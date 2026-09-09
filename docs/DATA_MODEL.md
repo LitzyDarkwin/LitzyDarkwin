@@ -65,3 +65,19 @@ migrations (Phase 9 backup behavior; no destructive migrations shipped yet).
 
 Defaults: market fresh 12h / stale 72h; addon sync fresh 10min / stale 24h;
 crowd fresh 24h / stale 14d. Stored in config, surfaced in UI.
+
+## Well-known `app_settings` keys (JSON values)
+
+| key | type | default | writer |
+|-----|------|---------|--------|
+| `wow_dir` | string\|null | null | Settings UI |
+| `region` | string | `eu` | Settings UI |
+| `market_provider` | string | `tsm` | Settings UI |
+| `market_refresh_hours` | int | 12 | Settings UI |
+| `crowd.share` / `crowd.use` | bool | false | Settings UI |
+| `crowd.endpoint` | string | `""` | Settings UI |
+| `route.config` / `route.movement_profile` | object | `{}` | Routes UI (P4) |
+| `ui.last_route` | string\|null | null | UI |
+| `sync.last_at` | int\|null | null | bridge |
+| `sync.last_result` | string\|null | null | bridge |
+| `sync.last_export_at` | int\|null | null | bridge |
