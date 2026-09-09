@@ -17,15 +17,31 @@ done
 if [ -z "$LUAC" ] && [ -n "${LUA51_DIR:-}" ] && [ -x "$LUA51_DIR/luac" ]; then
   LUAC="$LUA51_DIR/luac"
 fi
-if [ -z "$LUAC" ]; then
-  echo "check-lua: FAIL — no Lua 5.1 compiler found (need luac5.1, luac, or \$LUA51_DIR/luac)" >&2
+
+# Fallback: stock lua 5.1 via loadfile() (also validates 5.1 dialect).
+LUA=""
+for c in lua5.1 lua; do
+  if command -v "$c" >/dev/null 2>&1; then LUA="$c"; break; fi
+done
+if [ -z "$LUA" ] && [ -x "$ROOT/.tools/lua51-src/lua" ]; then
+  LUA="$ROOT/.tools/lua51-src/lua"
+fi
+
+if [ -z "$LUAC" ] && [ -z "$LUA" ]; then
+  echo "check-lua: FAIL — no Lua 5.1 compiler/interpreter found" >&2
   exit 1
 fi
 
-echo "check-lua: using $LUAC"
+check_with_luac() { "$LUAC" -p "$1"; }
+check_with_lua() {
+  LUA_CHECK_FILE="$1" "$LUA" -e 'local f=os.getenv("LUA_CHECK_FILE"); local fn,err=loadfile(f); if not fn then io.stderr:write(f..": "..(err or "?").."\n") os.exit(1) end'
+}
+
+if [ -n "$LUAC" ]; then echo "check-lua: using $LUAC"; else echo "check-lua: using $LUA (loadfile mode)"; fi
 FAIL=0
 for f in "${FILES[@]}"; do
-  if "$LUAC" -p "$f"; then
+  if [ -n "$LUAC" ]; then check_with_luac "$f"; else check_with_lua "$f"; fi
+  if [ $? -eq 0 ]; then
     echo "ok  $f"
   else
     echo "FAIL  $f" >&2
@@ -33,4 +49,4 @@ for f in "${FILES[@]}"; do
   fi
 done
 if [ "$FAIL" -ne 0 ]; then echo "check-lua: FAILURES" >&2; exit 1; fi
-echo "check-lua: PASS (${#FILES[@]} files)"
+echo "check-lua: PASS (${#FILES[@]} files, Lua 5.1 dialect)"

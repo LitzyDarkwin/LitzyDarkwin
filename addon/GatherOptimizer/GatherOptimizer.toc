@@ -1,0 +1,16 @@
+## Interface: 120100
+## Title: GatherOptimizer
+## Notes: Farming session tracker and route companion for the wowgoldfarm desktop app. Analytical only — no automation.
+## Author: wowgoldfarm
+## Version: 0.1.0
+## SavedVariables: GatherOptimizerDB
+## OptionalDeps: GatherMate2, Routes, TomTom
+
+Core.lua
+Store.lua
+Session.lua
+GatherMate.lua
+Routes.lua
+Navigation.lua
+Bridge.lua
+UI.lua

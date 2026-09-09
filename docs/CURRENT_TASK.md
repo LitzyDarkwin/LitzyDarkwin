@@ -1,7 +1,8 @@
 # CURRENT TASK
 
-**Phase 1 — GatherOptimizer WoW addon.**
+**Phase 2 — Desktop application foundation.**
 
-Objective: build the full Lua addon (Core/Store/Session/GatherMate/Routes/
-Navigation/Bridge/UI), TOC, mocked-WoW test harness, sample SavedVariables
-fixture. Validate with Lua 5.1 (luac + harness). Then commit.
+Objective: Rust core settings/bridge/lua-parser/diagnostics + Tauri commands
+(detect_wow, sync_addon, settings, diagnostics) + React shell (Settings page,
+sync UI, freshness states, diagnostics view, error/loading/empty coverage).
+Validate: frontend suite + schema; Rust in CI. Then commit.

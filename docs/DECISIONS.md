@@ -48,7 +48,9 @@ WoW API with stock Lua 5.1. Rationale: validates addon logic outside the game cl
 transcription errors; documents expected values where Rust can't run locally.
 
 ## D11 — Import-string route transfer as primary addon-bound channel
-Compact `GO1.<base36…>` payload with checksum parsed by `/go import`.
+Compact `GO1.<map>.<n>.<coords>.<check>` payload (decimal triplets, mod-997
+checksum) parsed by `/go import`. Chosen over base64 packing for debuggability
+and trivial reimplementation on both sides.
 Rationale: addons cannot read arbitrary files; SV-file patching while WoW runs is
 unsafe. Optional offline SV merge (WoW closed, with backup) is secondary.
 

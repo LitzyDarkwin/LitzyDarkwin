@@ -52,3 +52,6 @@ release/
 # Local WoW paths / user data mirrors
 .wow/
 local-data/
+
+# Locally built helper tools (not part of the product)
+.tools/

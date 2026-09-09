@@ -34,6 +34,14 @@ All external data is untrusted: validate, normalize, attribute, timestamp.
   waypoint list still works standalone.
 - All calls wrapped in `pcall`; absence only disables that adapter (`status` shown).
 
+## Desktop → addon route transfer — GO1 import string (concrete, Phase 1)
+- Format: `GO1.<mapID>.<n>.<coords>.<check>`; coords = per-waypoint `XXXYYY`
+  decimal triplets (`floor(x*10)` clamped to 000..999, 0.1 map-unit precision);
+  check = weighted digit sum mod 997, zero-padded to 3.
+- Example: `GO1.2346.2.042137500500.123`. Max 40 waypoints (addon cap).
+- Implemented in `addon/GatherOptimizer/Bridge.lua` (`EncodeRoute`/
+  `DecodeRouteString`); desktop encodes via `export_route_string` (Phase 6).
+
 ## Crowd (future remote)
 - HTTP contract: `POST /v1/observations` (anonymous bucketed payload, client hash
   rotated daily), `GET /v1/aggregate?region&zone&since`. Disabled by default;
