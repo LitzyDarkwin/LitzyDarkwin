@@ -1,0 +1,54 @@
+# wowgoldfarm — build & local artifacts
+target/
+dist/
+dist-ssr/
+node_modules/
+src-tauri/target/
+
+# Tauri
+apps/desktop/src-tauri/target/
+*.AppImage
+*.dmg
+*.exe
+*.msi
+*.nsis.zip
+*.app.tar.gz
+*.sig
+apps/desktop/src-tauri/gen/
+
+# Vite / TS
+*.local
+vite.config.ts.timestamp-*
+*.tsbuildinfo
+
+# Test / coverage
+coverage/
+lcov.info
+test-results/
+
+# Logs & OS
+*.log
+logs/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local dev / secrets (never commit)
+.env
+.env.*
+*.pem
+*.key
+secrets/
+
+# Python helper envs
+.venv/
+__pycache__/
+*.pyc
+
+# Addon packaging output
+release/
+*.zip
+
+# Local WoW paths / user data mirrors
+.wow/
+local-data/

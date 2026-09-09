@@ -1,0 +1,23 @@
+[package]
+name = "wowgoldfarm-core"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.77"
+description = "Domain logic for wowgoldfarm: atlas, routes, market, sessions, intelligence, crowd."
+license = "MIT"
+
+[lib]
+name = "wowgoldfarm_core"
+path = "src/lib.rs"
+
+[dependencies]
+rusqlite = { version = "0.32", features = ["bundled"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
+thiserror = "2"
+csv = "1"
+log = "0.4"
+
+[dev-dependencies]
+tempfile = "3"

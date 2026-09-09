@@ -1,0 +1,30 @@
+[package]
+name = "wowgoldfarm"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.77"
+description = "wowgoldfarm desktop shell (Tauri 2). Thin commands over wowgoldfarm-core."
+license = "MIT"
+
+[lib]
+name = "wowgoldfarm_lib"
+path = "src/lib.rs"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+reqwest = { version = "12", default-features = true, features = ["json", "blocking"] }
+log = "0.4"
+env_logger = "0.11"
+thiserror = "2"
+chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
+wowgoldfarm-core = { path = "../../../crates/core" }
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
