@@ -6,6 +6,7 @@
 - [x] Phase 3 — Farming Atlas (checkpoint 2026-09-09)
 - [x] Phase 4 — Economic route engine (checkpoint 2026-09-09)
 - [x] Phase 5 — Market engine, TSM EU (checkpoint 2026-09-09)
+- [x] Phase 6 — Live session dashboard (checkpoint 2026-09-09)
 - [ ] Phase 4 — Economic route engine
 - [ ] Phase 5 — Market engine
 - [ ] Phase 6 — Live farm session system

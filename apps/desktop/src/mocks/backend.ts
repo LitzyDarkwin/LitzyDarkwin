@@ -12,6 +12,7 @@ import type {
   RouteSummary,
   SaveRouteInput,
   SavedRoute,
+  SessionDetail,
   Settings,
   SyncReport,
   SyncStateInfo,
@@ -26,6 +27,7 @@ import {
   mockSearchItems,
   mockValuation,
 } from './market-data';
+import { mockSessionDetails, mockSessionStats, refreshDetail, toSummary } from './sessions-data';
 
 type Handler = (args?: Record<string, unknown>) => unknown;
 
@@ -38,7 +40,11 @@ interface MockState {
   lastExportAt: number | null;
   lastResult: string | null;
   routes: SavedRoute[];
+  sessions: SessionDetail[];
 }
+
+/** Then-price snapshots the mock analyze fills (mirrors market samples). */
+const MOCK_UNIT_PRICES: Record<number, number> = { 161502: 46_912, 161504: 105_710 };
 
 function defaultState(): MockState {
   return {
@@ -58,6 +64,7 @@ function defaultState(): MockState {
     lastExportAt: null,
     lastResult: null,
     routes: [mockSavedRoute()],
+    sessions: mockSessionDetails(),
   };
 }
 
@@ -300,6 +307,68 @@ const handlers: Record<string, Handler> = {
 
   get_market_prices: (args) =>
     mockMarketPrices(((args?.resourceIds as string[] | undefined) ?? []) as string[]),
+
+  list_sessions: (args) => {
+    const zoneId = (args?.zoneId as string | null | undefined) ?? null;
+    const limit = Math.max(1, Math.min(Number(args?.limit ?? 50), 200));
+    return mockState.sessions
+      .filter((d) => !zoneId || d.summary.zoneId === zoneId)
+      .sort((a, b) => b.summary.startedAt - a.summary.startedAt)
+      .slice(0, limit)
+      .map(toSummary);
+  },
+
+  get_session: (args) => {
+    const found = mockState.sessions.find((d) => d.summary.id === String(args?.id ?? ''));
+    if (!found) throw new Error(`unknown session \`${String(args?.id ?? '')}\``);
+    return found;
+  },
+
+  link_session_route: (args) => {
+    const found = mockState.sessions.find((d) => d.summary.id === String(args?.id ?? ''));
+    if (!found) throw new Error(`unknown session \`${String(args?.id ?? '')}\``);
+    const routeId = (args?.routeId as string | null | undefined) ?? null;
+    if (routeId == null) {
+      found.summary.routeId = null;
+      found.summary.expectedGph = null;
+      found.routeName = null;
+      found.expectedValuePerLoop = null;
+    } else {
+      const route = mockState.routes.find((r) => r.id === routeId);
+      if (!route) throw new Error(`unknown route \`${routeId}\``);
+      found.summary.routeId = route.id;
+      found.summary.expectedGph = Math.round(route.stats.gphExpected);
+      found.routeName = route.name;
+      found.expectedValuePerLoop = Math.round(route.stats.effectiveValue);
+    }
+    return refreshDetail(found);
+  },
+
+  analyze_session: (args) => {
+    const found = mockState.sessions.find((d) => d.summary.id === String(args?.id ?? ''));
+    if (!found) throw new Error(`unknown session \`${String(args?.id ?? '')}\``);
+    for (const it of found.items) {
+      if (it.unitThen == null && it.itemId in MOCK_UNIT_PRICES) {
+        it.unitThen = MOCK_UNIT_PRICES[it.itemId];
+        it.valueThen = Math.round(it.qty * it.unitThen);
+      }
+    }
+    found.summary.status = 'analyzed';
+    return refreshDetail(found);
+  },
+
+  get_session_stats: (args) => {
+    const zoneId = (args?.zoneId as string | null | undefined) ?? null;
+    const days = args?.days as number | null | undefined;
+    const since = days != null ? NOW() - Math.max(1, days) * 86400 : null;
+    return mockSessionStats(
+      mockState.sessions.filter(
+        (d) =>
+          (!zoneId || d.summary.zoneId === zoneId) &&
+          (since == null || d.summary.startedAt >= since),
+      ),
+    );
+  },
 };
 
 export function hasMock(cmd: string): boolean {

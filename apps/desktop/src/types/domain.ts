@@ -371,3 +371,74 @@ export interface MarketPrices {
   prices: Record<string, number>;
   missing: string[];
 }
+
+export interface SessionItemVal {
+  itemId: number;
+  resourceId: string | null;
+  displayName: string;
+  qty: number;
+  unitThen: number | null;
+  unitNow: number | null;
+  valueThen: number | null;
+  valueNow: number | null;
+}
+
+export interface SessionSummary {
+  id: string;
+  character: string;
+  realm: string;
+  zoneId: string | null;
+  zoneName: string | null;
+  routeId: string | null;
+  status: string;
+  startedAt: number;
+  endedAt: number | null;
+  activeSeconds: number;
+  itemCount: number;
+  totalQty: number;
+  valueThen: number;
+  valueNow: number;
+  thenPartial: boolean;
+  nowPartial: boolean;
+  gphThen: number | null;
+  gphNow: number | null;
+  expectedGph: number | null;
+}
+
+export interface SessionDetail {
+  summary: SessionSummary;
+  notes: string;
+  routeName: string | null;
+  expectedValuePerLoop: number | null;
+  items: SessionItemVal[];
+  expectedTotal: number | null;
+  deltaPctThen: number | null;
+  deltaPctNow: number | null;
+}
+
+export interface DayBucket {
+  day: string;
+  sessions: number;
+  activeSeconds: number;
+  valueThen: number;
+  valueNow: number;
+}
+
+export interface ResourceBucket {
+  key: string;
+  displayName: string;
+  qty: number;
+  valueThen: number;
+  valueNow: number;
+}
+
+export interface SessionStats {
+  sessionCount: number;
+  activeSeconds: number;
+  valueThen: number;
+  valueNow: number;
+  thenPartial: boolean;
+  nowPartial: boolean;
+  byDay: DayBucket[];
+  byResource: ResourceBucket[];
+}

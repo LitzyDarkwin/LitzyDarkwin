@@ -9,7 +9,8 @@ use std::path::{Path, PathBuf};
 use std::sync::{Mutex, MutexGuard};
 use tauri::{Manager, State};
 use wowgoldfarm_core::{
-    atlas, bridge, diagnostics, market, migrations, models, routes, seed, settings, storage,
+    atlas, bridge, diagnostics, market, migrations, models, routes, seed, sessions, settings,
+    storage,
 };
 
 /// Shared application state: one SQLite connection behind a mutex (rusqlite
@@ -397,6 +398,65 @@ fn get_market_prices(
     market::resolve_prices(&db, &resource_ids, &cfg, models::now_unix()).map_err(user_err)
 }
 
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn list_sessions(
+    state: State<'_, AppState>,
+    zone_id: Option<String>,
+    limit: usize,
+) -> Result<Vec<sessions::SessionSummary>, String> {
+    let db = lock_db(&state)?;
+    let cfg = valuation_cfg(&db)?;
+    sessions::list_sessions(&db, zone_id.as_deref(), limit, &cfg, models::now_unix())
+        .map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn get_session(
+    state: State<'_, AppState>,
+    id: String,
+) -> Result<sessions::SessionDetail, String> {
+    let db = lock_db(&state)?;
+    let cfg = valuation_cfg(&db)?;
+    sessions::get_session_detail(&db, &id, &cfg, models::now_unix()).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn link_session_route(
+    state: State<'_, AppState>,
+    id: String,
+    route_id: Option<String>,
+) -> Result<sessions::SessionDetail, String> {
+    let db = lock_db(&state)?;
+    sessions::link_route(&db, &id, route_id.as_deref(), models::now_unix()).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn analyze_session(
+    state: State<'_, AppState>,
+    id: String,
+) -> Result<sessions::SessionDetail, String> {
+    let db = lock_db(&state)?;
+    let cfg = valuation_cfg(&db)?;
+    sessions::analyze_session(&db, &id, &cfg, models::now_unix()).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn get_session_stats(
+    state: State<'_, AppState>,
+    zone_id: Option<String>,
+    days: Option<i64>,
+) -> Result<sessions::SessionStats, String> {
+    let db = lock_db(&state)?;
+    let cfg = valuation_cfg(&db)?;
+    sessions::session_stats(&db, zone_id.as_deref(), days, &cfg, models::now_unix())
+        .map_err(user_err)
+}
+
 fn init_logging(app_dir: &std::path::Path) {
     // Dev: stderr. Prod file log is added in Phase 9 diagnostics work.
     let _ = app_dir;
@@ -467,7 +527,12 @@ pub fn run() {
             get_market_status,
             get_item_valuation,
             search_market_items,
-            get_market_prices
+            get_market_prices,
+            list_sessions,
+            get_session,
+            link_session_route,
+            analyze_session,
+            get_session_stats
         ])
         .run(tauri::generate_context!())
         // Process entry point: nothing recoverable to do if the runtime fails.

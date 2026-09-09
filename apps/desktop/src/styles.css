@@ -195,3 +195,7 @@ input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent);
 .conf-bar { display: inline-block; width: 64px; height: 8px; border-radius: 4px; background: var(--bg-sunken); border: 1px solid var(--border); vertical-align: middle; margin-right: 6px; }
 .conf-fill { display: block; height: 100%; border-radius: 4px; background: var(--accent); }
 table.data tr.selected td { background: #20242c; }
+
+/* Sessions */
+.delta-plus { color: #7fd09a; font-weight: 700; }
+.delta-minus { color: #e07a7a; font-weight: 700; }

@@ -218,6 +218,7 @@ fn upsert_session(
     conn: &Connection,
     s: &serde_json::Value,
     report: &mut SyncFileReport,
+    now: i64,
 ) -> Result<()> {
     let Some(external_id) = str_field(s, "id") else {
         report.sessions_skipped += 1;
@@ -234,7 +235,8 @@ fn upsert_session(
     let started = i64_field(s, "startedAt").unwrap_or(0);
     let ended = i64_field(s, "endedAt");
     let active = i64_field(s, "activeSeconds").unwrap_or(0);
-    // Everything arriving via sync enters as `imported` (→ `analyzed` in Phase 6).
+    // Rows land as `imported`; analyze_session() below snapshots prices and
+    // flips them to `analyzed` in the same transaction.
     let status = "imported";
     let notes = str_field(s, "note").unwrap_or_default();
 
@@ -297,6 +299,17 @@ fn upsert_session(
             rusqlite::params![external_id, item_id, resource_id, qty],
         )?;
     }
+    // Snapshot market prices for the imported loot (first snapshot wins).
+    let refresh_hours = settings::get_raw(conn, keys::MARKET_REFRESH_HOURS)
+        .ok()
+        .flatten()
+        .and_then(|v| v.as_i64())
+        .unwrap_or(12) as f64;
+    let cfg = crate::market::ValuationConfig {
+        refresh_hours: refresh_hours.clamp(1.0, 168.0),
+        ..Default::default()
+    };
+    crate::sessions::analyze_session(conn, &external_id, &cfg, now)?;
     Ok(())
 }
 
@@ -349,7 +362,7 @@ fn import_observations(
     Ok(())
 }
 
-fn sync_one_file(conn: &Connection, file: &AccountSv) -> Result<SyncFileReport> {
+fn sync_one_file(conn: &Connection, file: &AccountSv, now: i64) -> Result<SyncFileReport> {
     let mut report = SyncFileReport {
         account: file.account.clone(),
         path: file.path.clone(),
@@ -392,7 +405,7 @@ fn sync_one_file(conn: &Connection, file: &AccountSv) -> Result<SyncFileReport> 
     let sessions = as_sequence(root.get("sessions").unwrap_or(&empty));
     report.sessions_seen = sessions.len();
     for s in sessions {
-        upsert_session(conn, s, &mut report)?;
+        upsert_session(conn, s, &mut report, now)?;
     }
     import_observations(conn, &root, &mut report)?;
 
@@ -425,7 +438,7 @@ pub fn sync_from_addon(
     };
     let mut newest_export: Option<i64> = None;
     for file in &detection.accounts {
-        let file_report = sync_one_file(&tx, file)?;
+        let file_report = sync_one_file(&tx, file, now)?;
         if let Some(ts) = file_report.export_timestamp {
             newest_export = Some(newest_export.map_or(ts, |prev: i64| prev.max(ts)));
         }

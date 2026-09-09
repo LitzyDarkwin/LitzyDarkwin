@@ -119,3 +119,19 @@ OpportunityScore =
 
 Ranked across zones/resources/routes with per-factor explanation strings.
 Never a bare "Farm X" — always why + risks.
+
+## 9. Session analytics (sessions.rs)
+
+Sessions arrive via addon sync as `imported`; analysis snapshots per-item unit
+values (market effective value) and flips status to `analyzed`. Snapshots are
+first-wins: re-analysis only fills missing prices, so THEN-values stay stable
+while NOW-values track the live market.
+
+- Totals: Σ qty × unit over priced lines; unpriced lines set `thenPartial` /
+  `nowPartial` instead of silently contributing zero.
+- GPH = value / active_hours (None without active time).
+- Route links snapshot the route's GPH + per-loop value; expected session
+  total = GPH × active_hours; delta % = (actual − expected) / expected × 100
+  (None without a baseline).
+- Stats bucket by UTC day (`date(started_at, 'unixepoch')`) and by resource
+  (unmapped loot buckets under `item:<id>`).

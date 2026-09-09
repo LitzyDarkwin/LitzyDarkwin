@@ -1,0 +1,87 @@
+{
+  "note": "Hand-geometry session math; basic deltas = -15.38%/-14.62% by hand.",
+  "cases": [
+    {
+      "id": "basic",
+      "items": [
+        {
+          "qty": 10,
+          "unitThen": 50000,
+          "unitNow": 52000
+        },
+        {
+          "qty": 5,
+          "unitThen": 120000,
+          "unitNow": 118000
+        }
+      ],
+      "activeSeconds": 3600,
+      "expectedGph": 1300000,
+      "expect": {
+        "totalQty": 15.0,
+        "valueThen": 1100000.0,
+        "valueNow": 1110000.0,
+        "thenPartial": false,
+        "nowPartial": false,
+        "gphThen": 1100000.0,
+        "gphNow": 1110000.0,
+        "expectedTotal": 1300000.0,
+        "deltaThen": -15.384615384615385,
+        "deltaNow": -14.615384615384617
+      }
+    },
+    {
+      "id": "partial",
+      "items": [
+        {
+          "qty": 4,
+          "unitThen": null,
+          "unitNow": 100
+        },
+        {
+          "qty": 2,
+          "unitThen": 50,
+          "unitNow": null
+        }
+      ],
+      "activeSeconds": 1800,
+      "expectedGph": 0,
+      "expect": {
+        "totalQty": 6.0,
+        "valueThen": 100.0,
+        "valueNow": 400.0,
+        "thenPartial": true,
+        "nowPartial": true,
+        "gphThen": 200.0,
+        "gphNow": 800.0,
+        "expectedTotal": 0.0,
+        "deltaThen": null,
+        "deltaNow": null
+      }
+    },
+    {
+      "id": "zero-time",
+      "items": [
+        {
+          "qty": 1,
+          "unitThen": 10,
+          "unitNow": 10
+        }
+      ],
+      "activeSeconds": 0,
+      "expectedGph": 100,
+      "expect": {
+        "totalQty": 1.0,
+        "valueThen": 10.0,
+        "valueNow": 10.0,
+        "thenPartial": false,
+        "nowPartial": false,
+        "gphThen": null,
+        "gphNow": null,
+        "expectedTotal": 0.0,
+        "deltaThen": null,
+        "deltaNow": null
+      }
+    }
+  ]
+}

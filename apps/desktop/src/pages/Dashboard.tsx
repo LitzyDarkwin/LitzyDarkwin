@@ -1,8 +1,18 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { formatDuration, formatGold, formatTime } from '../lib/format';
+import { listSessions } from '../lib/sessions-api';
 import { useAppStore } from '../stores/app';
+import type { SessionSummary } from '../types/domain';
 
 export default function Dashboard() {
   const { status, statusError, loading } = useAppStore();
+  const [recent, setRecent] = useState<SessionSummary[]>([]);
+
+  useEffect(() => {
+    if (!status) return;
+    listSessions(undefined, 5).then(setRecent).catch(() => {});
+  }, [status]);
   return (
     <div className="page">
       <header className="page-head">
@@ -32,6 +42,39 @@ export default function Dashboard() {
               <dt>Sync</dt>
               <dd>{status.syncState}</dd>
             </dl>
+          </section>
+          <section className="card">
+            <h2>Recent sessions</h2>
+            {recent.length === 0 && (
+              <p className="muted">No sessions yet — sync the addon after a farm run.</p>
+            )}
+            {recent.length > 0 && (
+              <div className="table-wrap">
+                <table className="data" data-testid="recent-sessions">
+                  <thead>
+                    <tr>
+                      <th>Started</th>
+                      <th>Zone</th>
+                      <th>Time</th>
+                      <th>Value now</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {recent.map((s) => (
+                      <tr key={s.id}>
+                        <td>{formatTime(s.startedAt)}</td>
+                        <td>{s.zoneName ?? '—'}</td>
+                        <td>{formatDuration(s.activeSeconds)}</td>
+                        <td>{formatGold(s.valueNow)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+            <Link className="btn btn-secondary" to="/live">
+              Open Live Farm
+            </Link>
           </section>
         </div>
       )}

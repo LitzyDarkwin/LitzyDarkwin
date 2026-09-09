@@ -512,12 +512,60 @@ def verify_valuation(fx: dict) -> None:
         check_eq(f"valuation[{cid}].freshness", got["freshness"], ex["freshness"])
 
 
+# --- session math (sessions.rs) ------------------------------------------------------
+
+
+def py_session_totals(items: list) -> dict:
+    qty, then, now, then_partial, now_partial = 0.0, 0.0, 0.0, False, False
+    for it in items:
+        q = max(it["qty"], 0.0)
+        qty += q
+        if it["unitThen"] is None:
+            then_partial = True
+        else:
+            then += q * max(it["unitThen"], 0)
+        if it["unitNow"] is None:
+            now_partial = True
+        else:
+            now += q * max(it["unitNow"], 0)
+    return {"qty": qty, "then": then, "now": now, "thenPartial": then_partial,
+            "nowPartial": now_partial}
+
+
+def verify_session(fx: dict) -> None:
+    for case in fx["cases"]:
+        cid = case["id"]
+        t = py_session_totals(case["items"])
+        ex = case["expect"]
+        check(f"session[{cid}].qty", t["qty"], ex["totalQty"], 1e-9)
+        check(f"session[{cid}].valueThen", t["then"], ex["valueThen"], 1e-9)
+        check(f"session[{cid}].valueNow", t["now"], ex["valueNow"], 1e-9)
+        check_eq(f"session[{cid}].thenPartial", t["thenPartial"], ex["thenPartial"])
+        check_eq(f"session[{cid}].nowPartial", t["nowPartial"], ex["nowPartial"])
+        active, rate = case["activeSeconds"], case["expectedGph"]
+        gph_then = t["then"] / (active / 3600.0) if active > 0 else None
+        gph_now = t["now"] / (active / 3600.0) if active > 0 else None
+        exp_total = rate * max(active, 0) / 3600.0
+        d_then = (t["then"] - exp_total) / exp_total * 100.0 if exp_total > 0 else None
+        d_now = (t["now"] - exp_total) / exp_total * 100.0 if exp_total > 0 else None
+        for name, got, want in [("gphThen", gph_then, ex["gphThen"]),
+                                ("gphNow", gph_now, ex["gphNow"]),
+                                ("deltaThen", d_then, ex["deltaThen"]),
+                                ("deltaNow", d_now, ex["deltaNow"])]:
+            if want is None:
+                check_eq(f"session[{cid}].{name}", got, None)
+            else:
+                check(f"session[{cid}].{name}", got, want, 1e-9)
+        check(f"session[{cid}].expectedTotal", exp_total, ex["expectedTotal"], 1e-9)
+
+
 VERIFIERS = {
     "geo.json": verify_geo,
     "cluster.json": verify_cluster,
     "route.json": verify_route,
     "go1.json": verify_go1,
     "valuation.json": verify_valuation,
+    "session.json": verify_session,
 }
 
 
