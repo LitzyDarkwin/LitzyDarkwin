@@ -14,6 +14,7 @@ import type {
   SyncStateInfo,
   WowDetection,
 } from '../types/domain';
+import { MOCK_TREE, mockObservations, mockSearch, mockZoneDetail } from './atlas-data';
 
 type Handler = (args?: Record<string, unknown>) => unknown;
 
@@ -175,6 +176,20 @@ const handlers: Record<string, Handler> = {
     };
     return report;
   },
+
+  get_atlas_tree: () => MOCK_TREE,
+
+  search_resources: (args) =>
+    mockSearch(String(args?.query ?? ''), (args?.category as string | null) ?? null),
+
+  get_zone_detail: (args) => mockZoneDetail(String(args?.zoneId ?? '')),
+
+  get_zone_observations: (args) =>
+    mockObservations(
+      String(args?.zoneId ?? ''),
+      ((args?.resourceIds as string[] | undefined) ?? []) as string[],
+      Number(args?.grid ?? 20),
+    ),
 };
 
 export function hasMock(cmd: string): boolean {

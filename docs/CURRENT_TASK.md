@@ -1,7 +1,8 @@
 # CURRENT TASK
 
-**Phase 3 — Farming Atlas.**
+**Phase 4 — Economic route engine.**
 
-Objective: seed provider + atlas service (tree, search, zone detail, clustered
-observations, stats) + Atlas UI (browser, filters, density map, route handoff).
-Validate: frontend suite + rust syntax gate; Rust tests in CI. Then commit.
+Objective: Rust cluster/optimize/simulate pipeline (deterministic, seeded) +
+route persistence + fixtures/expected + Routes UI (generate, compare, save,
+edit/exclude). Validate: frontend suite + verify-algorithms; Rust in CI.
+Then commit.

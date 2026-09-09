@@ -97,6 +97,94 @@ export interface SyncStateInfo {
   freshness: Freshness;
 }
 
+/* Phase 3 — atlas ------------------------------------------------------------ */
+
+export interface TreeZone {
+  id: string;
+  name: string;
+  mapId: number | null;
+  observationCount: number;
+  resourceCount: number;
+}
+
+export interface TreeContinent {
+  id: string;
+  name: string;
+  zones: TreeZone[];
+}
+
+export interface TreeExpansion {
+  id: string;
+  name: string;
+  short: string;
+  continents: TreeContinent[];
+}
+
+export interface AtlasTree {
+  expansions: TreeExpansion[];
+}
+
+export interface ZoneRef {
+  id: string;
+  name: string;
+}
+
+export interface ResourceHit {
+  id: string;
+  name: string;
+  categoryId: string;
+  categoryName: string;
+  itemId: number | null;
+  observationCount: number;
+  zones: ZoneRef[];
+}
+
+export interface ZoneResourceSummary {
+  resourceId: string;
+  resourceName: string;
+  categoryId: string;
+  itemId: number | null;
+  observations: number;
+  sources: string[];
+  avgYield: number | null;
+  newestObservation: number | null;
+}
+
+export interface ZoneDetail {
+  id: string;
+  name: string;
+  mapId: number | null;
+  continentId: string;
+  continentName: string;
+  expansionId: string;
+  expansionName: string;
+  yardsPerUnit: number;
+  observationCount: number;
+  resources: ZoneResourceSummary[];
+}
+
+export interface ResourceCount {
+  resourceId: string;
+  count: number;
+}
+
+export interface GridCell {
+  gx: number;
+  gy: number;
+  cx: number;
+  cy: number;
+  count: number;
+  topResource: string | null;
+  byResource: ResourceCount[];
+}
+
+export interface ClusteredObservations {
+  grid: number;
+  cells: GridCell[];
+  totalPoints: number;
+  truncated: boolean;
+}
+
 export interface DiagnosticReport {
   appVersion: string;
   schemaVersion: number;

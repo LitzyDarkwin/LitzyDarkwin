@@ -1,0 +1,9 @@
+{
+  "note": "ALGORITHMS.md §1: Euclidean map distance × yards_per_unit. Asserted identically by Rust route tests (Phase 4) and scripts/verify-algorithms.py.",
+  "distances": [
+    {"id": "3-4-5", "a": [0, 0], "b": [3, 4], "yards_per_unit": 10.0, "yards": 50.0},
+    {"id": "diag", "a": [10, 10], "b": [20, 20], "yards_per_unit": 10.0, "yards": 141.4213562373095},
+    {"id": "zero", "a": [5, 5], "b": [5, 5], "yards_per_unit": 10.0, "yards": 0.0},
+    {"id": "scale", "a": [0, 0], "b": [3, 4], "yards_per_unit": 7.5, "yards": 37.5}
+  ]
+}

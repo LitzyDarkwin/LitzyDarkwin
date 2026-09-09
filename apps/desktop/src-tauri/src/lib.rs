@@ -7,7 +7,7 @@ use serde::Serialize;
 use std::path::{Path, PathBuf};
 use std::sync::{Mutex, MutexGuard};
 use tauri::{Manager, State};
-use wowgoldfarm_core::{bridge, diagnostics, migrations, models, settings, storage};
+use wowgoldfarm_core::{atlas, bridge, diagnostics, migrations, models, seed, settings, storage};
 
 /// Shared application state: one SQLite connection behind a mutex (rusqlite
 /// connections are `Send`, and all DB access is short + synchronous).
@@ -134,6 +134,43 @@ fn get_diagnostics(state: State<'_, AppState>) -> Result<diagnostics::Diagnostic
         .map_err(user_err)
 }
 
+#[tauri::command]
+fn get_atlas_tree(state: State<'_, AppState>) -> Result<atlas::AtlasTree, String> {
+    let db = lock_db(&state)?;
+    atlas::tree(&db).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn search_resources(
+    state: State<'_, AppState>,
+    query: String,
+    category: Option<String>,
+    limit: usize,
+) -> Result<Vec<atlas::ResourceHit>, String> {
+    let db = lock_db(&state)?;
+    atlas::search_resources(&db, &query, category.as_deref(), limit).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn get_zone_detail(state: State<'_, AppState>, zone_id: String) -> Result<atlas::ZoneDetail, String> {
+    let db = lock_db(&state)?;
+    atlas::zone_detail(&db, &zone_id).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn get_zone_observations(
+    state: State<'_, AppState>,
+    zone_id: String,
+    resource_ids: Vec<String>,
+    grid: usize,
+) -> Result<atlas::ClusteredObservations, String> {
+    let db = lock_db(&state)?;
+    atlas::zone_observations(&db, &zone_id, &resource_ids, grid).map_err(user_err)
+}
+
 fn init_logging(app_dir: &std::path::Path) {
     // Dev: stderr. Prod file log is added in Phase 9 diagnostics work.
     let _ = app_dir;
@@ -152,6 +189,18 @@ fn init_state(app: &tauri::App) -> Result<AppState, wowgoldfarm_core::error::App
     let applied = migrations::migrate(&mut db)?;
     if !applied.is_empty() {
         log::info!("applied migrations: {applied:?}");
+    }
+    // Bundled atlas seed (idempotent, upgrade-safe). A corrupt seed must not
+    // brick startup, but it is always logged loudly.
+    match seed::load(&mut db) {
+        Ok(stats) => log::info!(
+            "atlas seed: {} zones, {} resources, {} observations ({} merges)",
+            stats.zones,
+            stats.resources,
+            stats.observations,
+            stats.merged_zones + stats.merged_resources
+        ),
+        Err(e) => log::error!("atlas seed failed: {}", e.user_message()),
     }
     Ok(AppState { db: Mutex::new(db), app_dir, db_path })
 }
@@ -176,7 +225,11 @@ pub fn run() {
             get_sync_state,
             get_settings,
             update_settings,
-            get_diagnostics
+            get_diagnostics,
+            get_atlas_tree,
+            search_resources,
+            get_zone_detail,
+            get_zone_observations
         ])
         .run(tauri::generate_context!())
         // Process entry point: nothing recoverable to do if the runtime fails.

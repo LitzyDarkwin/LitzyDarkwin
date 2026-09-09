@@ -1,0 +1,4776 @@
+{
+ "generated_by": "scripts/gen-seed.py (seed=20260909)",
+ "expansions": [
+  {
+   "id": "tww",
+   "name": "The War Within",
+   "short": "TWW",
+   "sort_order": 100
+  },
+  {
+   "id": "df",
+   "name": "Dragonflight",
+   "short": "DF",
+   "sort_order": 90
+  }
+ ],
+ "continents": [
+  {
+   "id": "khaz-algar",
+   "expansion_id": "tww",
+   "name": "Khaz Algar"
+  },
+  {
+   "id": "dragon-isles",
+   "expansion_id": "df",
+   "name": "Dragon Isles"
+  }
+ ],
+ "zones": [
+  {
+   "id": "isle-of-dorn",
+   "continent_id": "khaz-algar",
+   "name": "Isle of Dorn",
+   "map_id": 2248,
+   "yards_per_unit": 10.0,
+   "bounds_json": "{}"
+  },
+  {
+   "id": "ringing-deeps",
+   "continent_id": "khaz-algar",
+   "name": "The Ringing Deeps",
+   "map_id": 2214,
+   "yards_per_unit": 10.0,
+   "bounds_json": "{}"
+  },
+  {
+   "id": "hallowfall",
+   "continent_id": "khaz-algar",
+   "name": "Hallowfall",
+   "map_id": 2215,
+   "yards_per_unit": 10.0,
+   "bounds_json": "{}"
+  },
+  {
+   "id": "azj-kahet",
+   "continent_id": "khaz-algar",
+   "name": "Azj-Kahet",
+   "map_id": 2255,
+   "yards_per_unit": 10.0,
+   "bounds_json": "{}"
+  },
+  {
+   "id": "ohnahran-plains",
+   "continent_id": "dragon-isles",
+   "name": "Ohn'ahran Plains",
+   "map_id": 2023,
+   "yards_per_unit": 10.0,
+   "bounds_json": "{}"
+  },
+  {
+   "id": "thaldrzsus",
+   "continent_id": "dragon-isles",
+   "name": "Thaldraszus",
+   "map_id": 2025,
+   "yards_per_unit": 10.0,
+   "bounds_json": "{}"
+  }
+ ],
+ "categories": [
+  {
+   "id": "mining",
+   "key": "mining",
+   "name": "Mining"
+  },
+  {
+   "id": "herbalism",
+   "key": "herbalism",
+   "name": "Herbalism"
+  },
+  {
+   "id": "fishing",
+   "key": "fishing",
+   "name": "Fishing"
+  },
+  {
+   "id": "skinning",
+   "key": "skinning",
+   "name": "Skinning"
+  },
+  {
+   "id": "treasure",
+   "key": "treasure",
+   "name": "Treasure"
+  },
+  {
+   "id": "mob",
+   "key": "mob",
+   "name": "Mob farming"
+  },
+  {
+   "id": "other",
+   "key": "other",
+   "name": "Other"
+  }
+ ],
+ "resources": [
+  {
+   "id": "bismuth",
+   "category_id": "mining",
+   "key": "bismuth",
+   "name": "Bismuth",
+   "item_id": 161502,
+   "quality": 1
+  },
+  {
+   "id": "ironclaw-ore",
+   "category_id": "mining",
+   "key": "ironclaw-ore",
+   "name": "Ironclaw Ore",
+   "item_id": 161503,
+   "quality": 1
+  },
+  {
+   "id": "mycobloom",
+   "category_id": "herbalism",
+   "key": "mycobloom",
+   "name": "Mycobloom",
+   "item_id": 161504,
+   "quality": 1
+  },
+  {
+   "id": "luredrop",
+   "category_id": "herbalism",
+   "key": "luredrop",
+   "name": "Luredrop",
+   "item_id": 161505,
+   "quality": 1
+  },
+  {
+   "id": "serevite-ore",
+   "category_id": "mining",
+   "key": "serevite-ore",
+   "name": "Serevite Ore",
+   "item_id": 161506,
+   "quality": 1
+  },
+  {
+   "id": "draconium-ore",
+   "category_id": "mining",
+   "key": "draconium-ore",
+   "name": "Draconium Ore",
+   "item_id": 161507,
+   "quality": 1
+  },
+  {
+   "id": "hochenblume",
+   "category_id": "herbalism",
+   "key": "hochenblume",
+   "name": "Hochenblume",
+   "item_id": 161508,
+   "quality": 1
+  },
+  {
+   "id": "writhebark",
+   "category_id": "herbalism",
+   "key": "writhebark",
+   "name": "Writhebark",
+   "item_id": 161509,
+   "quality": 1
+  }
+ ],
+ "observations": [
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 32.04,
+   "y": 36.3,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 35.08,
+   "y": 34.35,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 26.67,
+   "y": 35.58,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 29.15,
+   "y": 32.11,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 33.1,
+   "y": 30.51,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 30.56,
+   "y": 30.54,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 31.13,
+   "y": 38.16,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 29.52,
+   "y": 30.66,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 38.58,
+   "y": 35.84,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 27.2,
+   "y": 36.07,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 25.38,
+   "y": 34.88,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 33.96,
+   "y": 31.82,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 31.89,
+   "y": 40.63,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 38.29,
+   "y": 38.4,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 24.67,
+   "y": 36.56,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 23.38,
+   "y": 32.47,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 29.96,
+   "y": 33.83,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 27.35,
+   "y": 25.95,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 33.7,
+   "y": 28.97,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 33.68,
+   "y": 42.68,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 25.68,
+   "y": 35.62,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 24.23,
+   "y": 33.58,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 29.06,
+   "y": 36.04,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 30.37,
+   "y": 38.31,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 25.37,
+   "y": 28.16,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "bismuth",
+   "map_id": 2248,
+   "x": 30.72,
+   "y": 37.49,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 62.45,
+   "y": 60.93,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 67.06,
+   "y": 61.86,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 64.21,
+   "y": 65.2,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 66.94,
+   "y": 63.36,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 58.31,
+   "y": 59.26,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 58.11,
+   "y": 60.17,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 57.14,
+   "y": 64.65,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 58.84,
+   "y": 60.82,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 67.36,
+   "y": 56.2,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 67.08,
+   "y": 60.97,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 61.97,
+   "y": 63.36,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 64.61,
+   "y": 62.12,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 71.02,
+   "y": 67.35,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 66.79,
+   "y": 61.01,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 66.02,
+   "y": 63.04,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 65.43,
+   "y": 55.97,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 58.93,
+   "y": 55.86,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 63.93,
+   "y": 63.06,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 67.83,
+   "y": 59.49,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 65.77,
+   "y": 64.23,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 59.39,
+   "y": 64.72,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 67.81,
+   "y": 60.58,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 74.55,
+   "y": 58.69,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 65.73,
+   "y": 60.76,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 61.97,
+   "y": 64.2,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 63.46,
+   "y": 55.83,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 63.8,
+   "y": 63.81,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "bismuth",
+   "map_id": 2214,
+   "x": 61.43,
+   "y": 57.09,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 52.79,
+   "y": 73.1,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 48.93,
+   "y": 72.03,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 44.65,
+   "y": 62.95,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 44.05,
+   "y": 75.13,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 43.65,
+   "y": 62.67,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 54.23,
+   "y": 63.91,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 52.86,
+   "y": 72.33,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 49.49,
+   "y": 71.43,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 50.54,
+   "y": 73.36,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 47.36,
+   "y": 76.54,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 54.38,
+   "y": 67.17,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 49.27,
+   "y": 71.77,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 46.88,
+   "y": 70.21,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 51.68,
+   "y": 67.91,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 49.8,
+   "y": 63.72,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 43.9,
+   "y": 72.79,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 58.88,
+   "y": 70.57,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 51.84,
+   "y": 75.59,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 45.6,
+   "y": 72.96,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 54.63,
+   "y": 71.16,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 54.36,
+   "y": 64.39,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 42.52,
+   "y": 60.54,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 53.52,
+   "y": 66.59,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "bismuth",
+   "map_id": 2215,
+   "x": 45.15,
+   "y": 66.91,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 39.87,
+   "y": 40.3,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 36.59,
+   "y": 34.11,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 35.06,
+   "y": 33.5,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 40.76,
+   "y": 36.65,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 38.22,
+   "y": 38.69,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 40.2,
+   "y": 32.05,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 44.09,
+   "y": 38.44,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 37.47,
+   "y": 35.4,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 40.34,
+   "y": 34.52,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 38.96,
+   "y": 33.4,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 37.86,
+   "y": 38.43,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 35.69,
+   "y": 40.13,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 45.01,
+   "y": 38.5,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 37.09,
+   "y": 39.09,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 40.09,
+   "y": 33.22,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 42.74,
+   "y": 27.71,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 33.69,
+   "y": 36.57,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 38.01,
+   "y": 34.89,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 41.12,
+   "y": 37.99,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 29.89,
+   "y": 42.12,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 34.25,
+   "y": 31.19,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 40.76,
+   "y": 31.9,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 44.21,
+   "y": 38.06,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 43.71,
+   "y": 33.77,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 39.75,
+   "y": 33.96,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "bismuth",
+   "map_id": 2255,
+   "x": 44.64,
+   "y": 34.15,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 62.61,
+   "y": 57.95,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 66.17,
+   "y": 58.07,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 63.67,
+   "y": 49.73,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 60.24,
+   "y": 47.59,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 61.2,
+   "y": 46.53,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 65.03,
+   "y": 65.56,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 54.22,
+   "y": 54.67,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 56.99,
+   "y": 61.9,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 62.61,
+   "y": 53.91,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 55.25,
+   "y": 58.1,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 58.61,
+   "y": 55.08,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 65.08,
+   "y": 59.69,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 57.02,
+   "y": 53.19,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 56.69,
+   "y": 60.39,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 65.9,
+   "y": 54.56,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 65.17,
+   "y": 45.08,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 66.56,
+   "y": 54.47,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 63.63,
+   "y": 59.45,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 66.42,
+   "y": 55.49,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 60.29,
+   "y": 50.34,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 60.68,
+   "y": 58.69,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 59.97,
+   "y": 53.18,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 52.8,
+   "y": 56.15,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 68.67,
+   "y": 59.67,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 59.9,
+   "y": 55.93,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 68.17,
+   "y": 53.09,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 58.43,
+   "y": 59.41,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 56.63,
+   "y": 66.96,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 54.6,
+   "y": 49.65,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2248,
+   "x": 64.2,
+   "y": 57.9,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 31.69,
+   "y": 66.95,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 35.69,
+   "y": 72.27,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 27.25,
+   "y": 70.02,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 32.28,
+   "y": 63.13,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 31.93,
+   "y": 68.05,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 28.33,
+   "y": 64.5,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 28.45,
+   "y": 69.52,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 24.03,
+   "y": 71.81,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 27.39,
+   "y": 70.46,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 24.73,
+   "y": 65.21,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 26.56,
+   "y": 69.27,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 29.98,
+   "y": 73.54,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 33.21,
+   "y": 58.55,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 30.04,
+   "y": 69.74,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 29.53,
+   "y": 64.84,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 27.76,
+   "y": 64.35,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 28.22,
+   "y": 70.4,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 30.37,
+   "y": 64.76,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 27.53,
+   "y": 68.47,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 26.97,
+   "y": 65.62,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 29.79,
+   "y": 66.24,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2214,
+   "x": 30.51,
+   "y": 61.75,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 24.31,
+   "y": 39.88,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 19.59,
+   "y": 29.64,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 33.97,
+   "y": 44.36,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 37.2,
+   "y": 46.18,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 37.62,
+   "y": 48.02,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 26.81,
+   "y": 40.34,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 42.12,
+   "y": 32.33,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 32.27,
+   "y": 49.73,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 26.29,
+   "y": 47.3,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 28.93,
+   "y": 34.48,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 29.94,
+   "y": 39.58,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 35.03,
+   "y": 44.91,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 39.18,
+   "y": 31.25,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 29.02,
+   "y": 41.25,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 41.74,
+   "y": 44.01,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 28.94,
+   "y": 40.88,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 37.15,
+   "y": 42.47,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 35.0,
+   "y": 36.43,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 30.44,
+   "y": 39.8,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 34.78,
+   "y": 34.1,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 33.96,
+   "y": 38.93,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 40.22,
+   "y": 46.17,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 45.51,
+   "y": 42.72,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 36.28,
+   "y": 45.95,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 30.0,
+   "y": 41.88,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2215,
+   "x": 28.1,
+   "y": 34.51,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 58.46,
+   "y": 62.74,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 66.54,
+   "y": 62.02,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 61.07,
+   "y": 56.17,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 67.36,
+   "y": 61.96,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 63.26,
+   "y": 54.83,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 54.0,
+   "y": 54.82,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 57.31,
+   "y": 60.25,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 61.22,
+   "y": 55.25,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 65.57,
+   "y": 55.38,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 64.96,
+   "y": 55.41,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 66.52,
+   "y": 55.49,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 59.52,
+   "y": 57.43,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 65.23,
+   "y": 55.7,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 70.03,
+   "y": 55.28,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 62.93,
+   "y": 53.56,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 60.06,
+   "y": 60.93,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 59.49,
+   "y": 59.3,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 59.83,
+   "y": 59.54,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 61.99,
+   "y": 55.88,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 58.07,
+   "y": 58.13,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 52.66,
+   "y": 70.6,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 61.06,
+   "y": 60.4,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 63.02,
+   "y": 59.67,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 69.98,
+   "y": 60.23,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 55.34,
+   "y": 54.86,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 67.05,
+   "y": 64.47,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 59.37,
+   "y": 60.81,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "ironclaw-ore",
+   "map_id": 2255,
+   "x": 58.41,
+   "y": 56.96,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 45.64,
+   "y": 72.74,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 50.33,
+   "y": 72.8,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 46.91,
+   "y": 71.85,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 48.21,
+   "y": 73.24,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 46.07,
+   "y": 71.53,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 46.76,
+   "y": 74.71,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 48.83,
+   "y": 72.52,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 47.85,
+   "y": 69.91,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 47.42,
+   "y": 71.84,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 49.88,
+   "y": 65.17,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 46.51,
+   "y": 76.74,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 48.87,
+   "y": 78.96,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 43.0,
+   "y": 69.4,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 47.99,
+   "y": 72.54,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 49.98,
+   "y": 75.89,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 49.63,
+   "y": 71.84,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 46.33,
+   "y": 68.38,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 46.23,
+   "y": 68.87,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 52.28,
+   "y": 70.56,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 48.05,
+   "y": 65.37,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 44.02,
+   "y": 78.03,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 50.22,
+   "y": 70.02,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 42.38,
+   "y": 67.67,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "isle-of-dorn",
+   "resource_id": "mycobloom",
+   "map_id": 2248,
+   "x": 42.96,
+   "y": 65.87,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 42.67,
+   "y": 29.55,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 34.1,
+   "y": 31.23,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 35.81,
+   "y": 34.2,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 47.2,
+   "y": 32.28,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 42.44,
+   "y": 31.22,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 48.45,
+   "y": 26.37,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 38.42,
+   "y": 29.07,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 44.25,
+   "y": 25.52,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 46.48,
+   "y": 32.0,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 40.66,
+   "y": 32.92,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 38.3,
+   "y": 22.19,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 39.44,
+   "y": 34.29,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 38.69,
+   "y": 29.33,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 41.42,
+   "y": 31.06,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 39.89,
+   "y": 28.79,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 37.31,
+   "y": 24.55,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 42.34,
+   "y": 25.14,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 44.1,
+   "y": 32.44,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 42.99,
+   "y": 39.55,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 35.99,
+   "y": 22.34,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 42.63,
+   "y": 34.29,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 42.92,
+   "y": 31.21,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 39.58,
+   "y": 28.78,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 43.97,
+   "y": 19.57,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 48.06,
+   "y": 31.08,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 37.28,
+   "y": 28.34,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 43.38,
+   "y": 20.91,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 35.07,
+   "y": 26.07,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 40.44,
+   "y": 36.82,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "mycobloom",
+   "map_id": 2214,
+   "x": 43.27,
+   "y": 35.01,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 61.44,
+   "y": 49.57,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 63.95,
+   "y": 41.66,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 64.6,
+   "y": 43.78,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 68.85,
+   "y": 53.33,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 54.84,
+   "y": 48.02,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 66.43,
+   "y": 33.74,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 59.38,
+   "y": 43.5,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 62.09,
+   "y": 43.63,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 57.77,
+   "y": 44.1,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 54.75,
+   "y": 44.06,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 60.51,
+   "y": 38.65,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 54.4,
+   "y": 44.63,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 63.51,
+   "y": 51.69,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 53.99,
+   "y": 42.62,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 62.98,
+   "y": 43.22,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 60.15,
+   "y": 43.6,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 61.17,
+   "y": 40.83,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 62.34,
+   "y": 36.31,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 62.16,
+   "y": 44.44,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 56.56,
+   "y": 49.16,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 57.73,
+   "y": 41.56,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 56.92,
+   "y": 41.18,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 60.1,
+   "y": 41.41,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 53.53,
+   "y": 42.47,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 54.2,
+   "y": 45.61,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 56.08,
+   "y": 37.68,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 57.27,
+   "y": 48.54,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 47.97,
+   "y": 44.08,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 61.62,
+   "y": 35.09,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "mycobloom",
+   "map_id": 2215,
+   "x": 64.78,
+   "y": 50.13,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 34.17,
+   "y": 74.57,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 30.58,
+   "y": 66.27,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 30.53,
+   "y": 64.6,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 33.1,
+   "y": 66.33,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 27.46,
+   "y": 67.61,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 34.68,
+   "y": 71.31,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 44.32,
+   "y": 65.09,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 36.67,
+   "y": 65.41,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 31.68,
+   "y": 64.57,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 35.23,
+   "y": 67.66,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 35.01,
+   "y": 66.9,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 30.76,
+   "y": 66.11,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 35.39,
+   "y": 71.25,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 36.82,
+   "y": 65.99,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 35.24,
+   "y": 61.98,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 30.13,
+   "y": 67.12,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 31.91,
+   "y": 72.55,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 26.69,
+   "y": 64.81,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 32.32,
+   "y": 64.24,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 32.93,
+   "y": 65.29,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 34.36,
+   "y": 67.12,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "mycobloom",
+   "map_id": 2255,
+   "x": 33.56,
+   "y": 69.78,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 59.62,
+   "y": 59.15,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 69.41,
+   "y": 60.78,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 70.03,
+   "y": 62.8,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 68.13,
+   "y": 60.53,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 64.38,
+   "y": 58.91,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 66.03,
+   "y": 64.73,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 67.76,
+   "y": 54.66,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 64.69,
+   "y": 57.33,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 60.61,
+   "y": 60.48,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 64.67,
+   "y": 59.56,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 63.77,
+   "y": 58.39,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 69.18,
+   "y": 53.08,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 63.24,
+   "y": 48.26,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 63.77,
+   "y": 62.06,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 61.29,
+   "y": 58.09,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 58.38,
+   "y": 57.11,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 64.26,
+   "y": 61.68,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 63.64,
+   "y": 59.94,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 62.13,
+   "y": 63.26,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 59.32,
+   "y": 51.55,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 58.28,
+   "y": 61.68,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 69.16,
+   "y": 62.72,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 64.98,
+   "y": 59.75,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 67.33,
+   "y": 53.91,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 57.17,
+   "y": 61.98,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 62.84,
+   "y": 59.64,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 64.33,
+   "y": 51.32,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ringing-deeps",
+   "resource_id": "luredrop",
+   "map_id": 2214,
+   "x": 65.38,
+   "y": 59.88,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 45.37,
+   "y": 77.41,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 59.41,
+   "y": 74.53,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 49.03,
+   "y": 63.79,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 43.23,
+   "y": 73.31,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 47.89,
+   "y": 67.3,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 41.21,
+   "y": 60.11,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 51.93,
+   "y": 67.6,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 48.27,
+   "y": 73.75,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 46.46,
+   "y": 61.87,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 50.47,
+   "y": 71.56,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 49.8,
+   "y": 68.12,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 51.86,
+   "y": 74.07,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 56.47,
+   "y": 76.73,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 59.25,
+   "y": 66.83,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 52.86,
+   "y": 71.0,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 44.7,
+   "y": 77.15,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 48.02,
+   "y": 67.95,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 56.15,
+   "y": 72.35,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 49.9,
+   "y": 67.79,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 52.84,
+   "y": 58.63,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 51.17,
+   "y": 74.23,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 52.48,
+   "y": 72.05,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 49.54,
+   "y": 77.05,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "hallowfall",
+   "resource_id": "luredrop",
+   "map_id": 2215,
+   "x": 53.18,
+   "y": 69.88,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 40.94,
+   "y": 33.93,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 34.01,
+   "y": 33.85,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 38.42,
+   "y": 22.74,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 37.53,
+   "y": 30.7,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 43.67,
+   "y": 38.05,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 39.48,
+   "y": 33.54,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 45.8,
+   "y": 41.62,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 44.67,
+   "y": 27.85,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 40.89,
+   "y": 40.21,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 36.72,
+   "y": 39.7,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 36.07,
+   "y": 36.88,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 38.36,
+   "y": 31.31,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 42.98,
+   "y": 29.33,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 38.97,
+   "y": 34.45,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 40.62,
+   "y": 36.79,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 44.58,
+   "y": 34.11,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 41.26,
+   "y": 42.19,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 40.51,
+   "y": 36.25,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 37.32,
+   "y": 35.25,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 30.55,
+   "y": 27.63,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 34.13,
+   "y": 32.59,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 38.15,
+   "y": 32.53,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 37.05,
+   "y": 30.58,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 39.83,
+   "y": 35.7,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 38.39,
+   "y": 34.15,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "azj-kahet",
+   "resource_id": "luredrop",
+   "map_id": 2255,
+   "x": 41.12,
+   "y": 31.4,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 71.16,
+   "y": 29.79,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 65.61,
+   "y": 27.27,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 70.89,
+   "y": 27.68,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 71.18,
+   "y": 24.97,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 71.59,
+   "y": 27.93,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 71.31,
+   "y": 27.6,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 68.84,
+   "y": 22.08,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 75.48,
+   "y": 26.55,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 62.74,
+   "y": 29.46,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 68.7,
+   "y": 29.41,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 69.0,
+   "y": 29.6,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 76.56,
+   "y": 34.25,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 78.15,
+   "y": 33.9,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 70.7,
+   "y": 27.69,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 63.66,
+   "y": 27.98,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 66.17,
+   "y": 32.55,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 68.55,
+   "y": 33.89,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 67.07,
+   "y": 29.41,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 75.61,
+   "y": 26.96,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 80.38,
+   "y": 31.6,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 63.24,
+   "y": 23.25,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "serevite-ore",
+   "map_id": 2023,
+   "x": 71.74,
+   "y": 29.37,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 41.63,
+   "y": 38.72,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 48.42,
+   "y": 50.58,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 32.99,
+   "y": 37.59,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 42.92,
+   "y": 41.75,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 32.77,
+   "y": 49.42,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 38.04,
+   "y": 41.11,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 43.89,
+   "y": 37.71,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 40.67,
+   "y": 43.94,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 40.2,
+   "y": 44.59,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 36.25,
+   "y": 39.99,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 34.84,
+   "y": 43.96,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 28.79,
+   "y": 43.42,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 44.23,
+   "y": 45.73,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 41.39,
+   "y": 43.91,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 37.35,
+   "y": 37.7,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 39.92,
+   "y": 48.58,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 42.88,
+   "y": 49.29,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 39.71,
+   "y": 38.87,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 40.35,
+   "y": 42.1,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 41.02,
+   "y": 39.52,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 33.28,
+   "y": 35.27,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 42.93,
+   "y": 44.2,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 37.0,
+   "y": 43.79,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 42.45,
+   "y": 44.78,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 44.52,
+   "y": 41.01,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "serevite-ore",
+   "map_id": 2025,
+   "x": 38.68,
+   "y": 39.05,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 31.0,
+   "y": 41.68,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 33.85,
+   "y": 35.66,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 29.66,
+   "y": 36.72,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 28.7,
+   "y": 42.67,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 31.69,
+   "y": 44.46,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 37.5,
+   "y": 38.46,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 32.8,
+   "y": 46.5,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 34.82,
+   "y": 46.68,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 41.99,
+   "y": 48.42,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 19.26,
+   "y": 39.52,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 36.25,
+   "y": 36.5,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 35.79,
+   "y": 37.53,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 28.19,
+   "y": 47.43,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 24.22,
+   "y": 40.37,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 33.25,
+   "y": 39.39,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 32.2,
+   "y": 37.33,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 27.75,
+   "y": 35.54,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 27.27,
+   "y": 38.44,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 27.0,
+   "y": 34.0,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 33.3,
+   "y": 36.14,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 33.77,
+   "y": 31.78,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 33.71,
+   "y": 42.51,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 33.42,
+   "y": 34.24,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 38.4,
+   "y": 38.72,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 31.01,
+   "y": 45.01,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "draconium-ore",
+   "map_id": 2023,
+   "x": 38.7,
+   "y": 34.84,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 54.03,
+   "y": 61.23,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 58.83,
+   "y": 63.41,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 64.15,
+   "y": 61.63,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 59.81,
+   "y": 59.62,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 70.8,
+   "y": 59.95,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 71.39,
+   "y": 63.17,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 59.48,
+   "y": 59.81,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 65.19,
+   "y": 61.13,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 59.4,
+   "y": 54.83,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 56.5,
+   "y": 55.92,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 58.53,
+   "y": 57.14,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 61.18,
+   "y": 63.59,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 60.34,
+   "y": 62.21,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 63.94,
+   "y": 63.04,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 58.75,
+   "y": 60.48,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 60.54,
+   "y": 56.69,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 58.41,
+   "y": 57.84,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 65.38,
+   "y": 60.81,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 65.88,
+   "y": 66.29,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 66.35,
+   "y": 60.62,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 67.66,
+   "y": 60.23,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 61.3,
+   "y": 54.25,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 67.91,
+   "y": 52.02,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 55.81,
+   "y": 48.05,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 56.43,
+   "y": 63.74,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 57.67,
+   "y": 58.7,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 54.87,
+   "y": 62.72,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "draconium-ore",
+   "map_id": 2025,
+   "x": 66.56,
+   "y": 63.1,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 62.85,
+   "y": 56.96,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 53.86,
+   "y": 53.27,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 60.69,
+   "y": 53.52,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 65.59,
+   "y": 50.63,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 58.81,
+   "y": 49.62,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 62.48,
+   "y": 57.23,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 64.25,
+   "y": 51.48,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 55.69,
+   "y": 48.43,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 54.36,
+   "y": 52.45,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 56.71,
+   "y": 48.77,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 53.81,
+   "y": 57.68,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 57.24,
+   "y": 52.49,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 51.65,
+   "y": 43.4,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 60.53,
+   "y": 51.08,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 51.33,
+   "y": 60.01,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 61.05,
+   "y": 50.32,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 55.84,
+   "y": 52.61,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 61.49,
+   "y": 40.15,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 61.65,
+   "y": 56.16,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 57.77,
+   "y": 56.04,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 60.6,
+   "y": 57.37,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 54.09,
+   "y": 57.82,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 56.16,
+   "y": 60.83,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 51.65,
+   "y": 46.8,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 62.73,
+   "y": 49.58,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 48.82,
+   "y": 56.98,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 59.81,
+   "y": 56.17,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 61.36,
+   "y": 46.87,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 55.95,
+   "y": 56.92,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "ohnahran-plains",
+   "resource_id": "hochenblume",
+   "map_id": 2023,
+   "x": 64.65,
+   "y": 52.93,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 49.33,
+   "y": 30.73,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 54.55,
+   "y": 25.13,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 55.98,
+   "y": 26.05,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 49.91,
+   "y": 18.93,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 53.37,
+   "y": 27.94,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 56.51,
+   "y": 29.18,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 47.46,
+   "y": 31.3,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 50.0,
+   "y": 21.61,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 50.74,
+   "y": 25.03,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 49.11,
+   "y": 27.44,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 49.82,
+   "y": 30.5,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 48.47,
+   "y": 27.03,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 52.42,
+   "y": 28.91,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 47.76,
+   "y": 31.32,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 41.78,
+   "y": 27.09,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 51.22,
+   "y": 29.69,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 46.93,
+   "y": 27.31,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 46.75,
+   "y": 29.31,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 49.85,
+   "y": 24.73,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 55.23,
+   "y": 24.91,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 48.2,
+   "y": 24.33,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "hochenblume",
+   "map_id": 2025,
+   "x": 57.27,
+   "y": 32.02,
+   "yield_qty": 3.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 44.73,
+   "y": 43.12,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 40.06,
+   "y": 42.06,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 45.5,
+   "y": 46.94,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 38.09,
+   "y": 38.69,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 42.71,
+   "y": 36.37,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 38.41,
+   "y": 40.62,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 33.95,
+   "y": 39.8,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 40.7,
+   "y": 39.98,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 30.92,
+   "y": 45.53,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 29.67,
+   "y": 46.97,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 30.84,
+   "y": 45.98,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 34.99,
+   "y": 38.29,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 38.08,
+   "y": 43.56,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 51.43,
+   "y": 38.8,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 33.05,
+   "y": 43.8,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 41.72,
+   "y": 41.89,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 35.69,
+   "y": 39.37,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 39.48,
+   "y": 46.92,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 41.18,
+   "y": 37.12,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 36.01,
+   "y": 43.89,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 37.27,
+   "y": 47.29,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 31.34,
+   "y": 36.38,
+   "yield_qty": 2.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 34.55,
+   "y": 43.66,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 36.64,
+   "y": 43.77,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 47.48,
+   "y": 40.68,
+   "yield_qty": 1.0
+  },
+  {
+   "zone_id": "thaldrzsus",
+   "resource_id": "writhebark",
+   "map_id": 2025,
+   "x": 34.64,
+   "y": 48.08,
+   "yield_qty": 2.0
+  }
+ ]
+}
