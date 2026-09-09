@@ -14,13 +14,17 @@
     <div class="brand">
       <span class="logo">✦</span>
       <div><b>AI Hub</b><small>ücretsiz modeller</small></div>
+      <button class="icon-btn" id="themeBtn" title="Tema değiştir">◐</button>
     </div>
-    <button class="new-chat" id="newChat">＋ Yeni sohbet</button>
+    <button class="new-chat" id="newChat">＋ Yeni sohbet <kbd>Ctrl+N</kbd></button>
     <input class="search" id="searchChats" placeholder="Geçmişte ara…" />
     <div class="history" id="history"></div>
     <div class="sidebar-foot">
       <button class="ghost" id="openKeys">🔑 Hesaplar & Anahtarlar</button>
-      <button class="ghost" id="exportBtn">⭳ Dışa aktar</button>
+      <button class="ghost" id="openSettings">⚙ Ayarlar</button>
+      <button class="ghost" id="exportBtn">⭳ Yedek al</button>
+      <button class="ghost" id="importBtn">⭱ Yedeği geri yükle</button>
+      <input type="file" id="importFile" accept="application/json" hidden />
     </div>
   </aside>
 
@@ -28,7 +32,7 @@
   <main class="main">
     <header class="topbar">
       <button class="icon-btn only-mobile" id="menuBtn">☰</button>
-      <button class="model-picker" id="modelPicker">
+      <button class="model-picker" id="modelPicker" title="Ctrl+K">
         <span class="dot" id="pickerDot"></span>
         <span id="pickerLabel">Model seç</span>
         <span class="caret">▾</span>
@@ -49,17 +53,25 @@
     <footer class="composer">
       <div class="composer-box">
         <textarea id="input" rows="1" placeholder="Bir şeyler sor…  (Enter: gönder · Shift+Enter: satır)"></textarea>
+        <button id="stop" class="send stop" title="Durdur" hidden>■</button>
         <button id="send" class="send" title="Gönder">➤</button>
       </div>
-      <div class="composer-meta" id="composerMeta"></div>
+      <div class="composer-meta">
+        <span id="composerMeta"></span>
+        <span class="meta-right"><span id="tokenHint"></span><button class="tiny" id="regenBtn" hidden>↻ Yeniden üret</button></span>
+      </div>
     </footer>
   </main>
 
   <!-- SAĞ: kota paneli -->
   <aside class="panel" id="panel">
-    <div class="panel-head"><b>Kota durumu</b><button class="icon-btn" id="closePanel">✕</button></div>
+    <div class="panel-head"><b>Kota durumu</b>
+      <span class="spacer"></span>
+      <button class="tiny" id="resetUsage" title="Sayaçları sıfırla">sıfırla</button>
+      <button class="icon-btn" id="closePanel">✕</button>
+    </div>
     <div class="panel-body" id="panelBody"></div>
-    <div class="panel-foot">Sayımlar bu cihazdaki kullanımına göre tahminidir. Resmî kalan kota için sağlayıcının panosuna bak.</div>
+    <div class="panel-foot">Sayımlar bu cihazdaki kullanımına göre tahminidir. OpenRouter için gerçek kalan kota sağlayıcıdan çekilir.</div>
   </aside>
 </div>
 
@@ -68,7 +80,8 @@
   <div class="modal-card wide">
     <div class="modal-head">
       <b>Model seç</b>
-      <input id="modelSearch" placeholder="Model veya sağlayıcı ara…" />
+      <input id="modelSearch" placeholder="Model veya sağlayıcı ara…  (↑↓ gez, Enter seç)" />
+      <label class="tgl"><input type="checkbox" id="onlyReady" /> sadece bağlı olanlar</label>
       <button class="icon-btn" data-close>✕</button>
     </div>
     <div class="modal-body" id="modelList"></div>
@@ -81,6 +94,40 @@
     <div class="modal-head"><b>Hesaplar & API anahtarları</b><button class="icon-btn" data-close>✕</button></div>
     <div class="modal-body" id="keyList"></div>
     <div class="modal-foot">Anahtarlar yalnızca tarayıcının <code>localStorage</code>'ında tutulur, sunucuya sadece istek anında iletilir.</div>
+  </div>
+</div>
+
+<!-- Ayarlar modal -->
+<div class="modal" id="setModal" hidden>
+  <div class="modal-card">
+    <div class="modal-head"><b>Ayarlar</b><button class="icon-btn" data-close>✕</button></div>
+    <div class="modal-body">
+      <div class="keyrow">
+        <div class="kh"><b>Sistem talimatı</b></div>
+        <div class="note">Her sohbette modele verilecek kalıcı yönerge.</div>
+        <textarea id="sysPrompt" class="ta" rows="4" placeholder="Örn: Kısa ve net cevap ver, Türkçe yaz."></textarea>
+      </div>
+      <div class="keyrow">
+        <div class="kh"><b>Yaratıcılık (temperature)</b><span class="badge" id="tempVal">0.7</span></div>
+        <div class="note">Düşük = tutarlı, yüksek = yaratıcı.</div>
+        <input type="range" id="temp" min="0" max="2" step="0.1" value="0.7" />
+      </div>
+      <div class="keyrow">
+        <div class="kh"><b>Bağlam penceresi</b><span class="badge" id="ctxVal">10</span></div>
+        <div class="note">Modele gönderilecek son mesaj sayısı. Az tutmak kotayı korur.</div>
+        <input type="range" id="ctx" min="2" max="40" step="2" value="10" />
+      </div>
+      <div class="keyrow">
+        <div class="kh"><b>Otomatik yedek model</b></div>
+        <div class="note">Kota dolunca (429) veya hata alınca bağlı olan başka bir modelle otomatik yeniden dener.</div>
+        <label class="tgl"><input type="checkbox" id="autoFallback" checked /> açık</label>
+      </div>
+      <div class="keyrow">
+        <div class="kh"><b>Enter ile gönder</b></div>
+        <label class="tgl"><input type="checkbox" id="enterSend" checked /> açık (kapalıysa Ctrl+Enter gönderir)</label>
+      </div>
+    </div>
+    <div class="modal-foot">Ayarlar bu tarayıcıda saklanır.</div>
   </div>
 </div>
 

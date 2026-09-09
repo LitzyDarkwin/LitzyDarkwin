@@ -10,13 +10,19 @@ Gemini, Groq, OpenRouter, Mistral, Cerebras, GitHub Models, NVIDIA NIM, Cohere, 
 
 ## Özellikler
 
-- 🎛 **40+ model, 12 sağlayıcı** — tek listeden seç, anında değiştir.
-- 📊 **Tahmini kota takibi** — her model için kalan istek/token ve **ne zaman yenileneceği** (günlük UTC, Pasifik gece yarısı, aylık…).
-- 💬 **Sohbet geçmişi** — otomatik kaydedilir, aranabilir, JSON olarak dışa aktarılabilir.
-- 🔑 **Giriş / API anahtarı yönetimi** — hesap gerektiren sağlayıcılar için tek tıkla anahtar alma linki ve "Test" butonu.
-- ⚡ **Streaming yanıt** — kelime kelime akar.
-- 🌓 Şık, sade, karanlık arayüz. Mobil uyumlu.
+- 🎛 **40+ model, 12 sağlayıcı** — tek listeden seç, anında değiştir (`Ctrl+K`, ↑↓ ile gez).
+- 📊 **Kota takibi** — her model için kalan istek/token, doluluk barı ve **ne zaman yenileneceği** geri sayımı (günlük UTC, Pasifik gece yarısı, aylık, kredi bazlı). OpenRouter'da gerçek kalan kota sağlayıcıdan canlı çekilir.
+- 🔁 **Otomatik yedek model** — kota dolduğunda (429) veya hata alındığında bağlı olan başka bir modelle otomatik yeniden dener.
+- 💬 **Sohbet geçmişi** — otomatik kayıt, arama, tarihe göre gruplama (Bugün/Dün/Bu hafta), mesaj düzenleme, yeniden üretme, **buradan dallan**.
+- 🔑 **Giriş / API anahtarı yönetimi** — tek tıkla anahtar alma linki ve "Test" butonu.
+- ⚡ **Streaming yanıt** + **Durdur** butonu.
+- 🎨 Markdown render: kod blokları (dil etiketi + kopyala), listeler, tablo, başlık, alıntı.
+- ⚙️ **Ayarlar** — sistem talimatı, temperature, bağlam penceresi, Enter davranışı.
+- 🌓 Karanlık/aydınlık tema, mobil uyumlu, yedek al/geri yükle.
 - 📦 **Sıfır bağımlılık** — sadece Node.js 18+. `npm install` bile gerekmez.
+
+### Kısayollar
+`Ctrl+K` model seçici · `Ctrl+N` yeni sohbet · `Esc` pencereyi kapat · `Enter` gönder · `Shift+Enter` satır
 
 ---
 

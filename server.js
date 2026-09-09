@@ -115,8 +115,12 @@ async function handleChat(req, res) {
   let usage = null;
   let charCount = 0;
 
+  // istemci bağlantıyı keserse yukarı akışı da iptal et
+  const ac = new AbortController();
+  req.on('close', () => ac.abort());
+
   try {
-    const upstream = await fetch(url, { method: 'POST', headers, body });
+    const upstream = await fetch(url, { method: 'POST', headers, body, signal: ac.signal });
     if (!upstream.ok || !upstream.body) {
       const text = await upstream.text().catch(() => '');
       let msg = text.slice(0, 600);
@@ -177,9 +181,45 @@ async function handleChat(req, res) {
     if (!usage) usage = { total: Math.round(charCount / 4) || 1, estimated: true };
     out.send({ type: 'done', usage, ms: Date.now() - started });
   } catch (e) {
-    out.send({ type: 'error', error: `Bağlantı hatası: ${e.message}` });
+    if (e.name === 'AbortError') {
+      try { out.send({ type: 'done', usage: usage || { total: Math.round(charCount / 4), estimated: true }, ms: Date.now() - started, aborted: true }); } catch {}
+    } else {
+      out.send({ type: 'error', error: `Bağlantı hatası: ${e.message}` });
+    }
   }
   out.end();
+}
+
+// Bazı sağlayıcılar gerçek kalan kotayı API'den verir
+async function handleQuota(req, res) {
+  const json = (o) => { res.writeHead(200, { 'content-type': 'application/json; charset=utf-8' }); res.end(JSON.stringify(o)); };
+  let payload = {};
+  try { payload = JSON.parse(await readBody(req)); } catch {}
+  const pid = payload.provider;
+  const key = (payload.apiKey || '').trim() || serverKey(pid || '');
+  if (!key) return json({ ok: false });
+  try {
+    if (pid === 'openrouter') {
+      const r = await fetch('https://openrouter.ai/api/v1/key', { headers: { authorization: `Bearer ${key}` } });
+      if (!r.ok) return json({ ok: false });
+      const d = (await r.json()).data || {};
+      return json({
+        ok: true, source: 'OpenRouter',
+        usage: d.usage, limit: d.limit,
+        remaining: d.limit == null ? null : Math.max(0, d.limit - (d.usage || 0)),
+        rateLimit: d.rate_limit, freeTier: d.is_free_tier
+      });
+    }
+    if (pid === 'huggingface') {
+      const r = await fetch('https://huggingface.co/api/whoami-v2', { headers: { authorization: `Bearer ${key}` } });
+      if (!r.ok) return json({ ok: false });
+      const d = await r.json();
+      return json({ ok: true, source: 'Hugging Face', name: d.name, plan: d.plan || d.type });
+    }
+    return json({ ok: false, unsupported: true });
+  } catch (e) {
+    return json({ ok: false, error: e.message });
+  }
 }
 
 async function handleVerify(req, res) {
@@ -236,6 +276,7 @@ const server = http.createServer(async (req, res) => {
     }
     if (pathname === '/api/chat' && req.method === 'POST') return handleChat(req, res);
     if (pathname === '/api/verify' && req.method === 'POST') return handleVerify(req, res);
+    if (pathname === '/api/quota' && req.method === 'POST') return handleQuota(req, res);
     return serveStatic(req, res);
   } catch (e) {
     res.writeHead(500, { 'content-type': 'text/plain; charset=utf-8' });
