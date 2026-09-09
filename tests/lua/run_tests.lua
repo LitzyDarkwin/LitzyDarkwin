@@ -202,6 +202,21 @@ test("GO1 encode/decode roundtrip at 0.1 precision", function()
   approx(r.waypoints[3].x, 99.9, 1e-9) -- clamped
 end)
 
+test("GO1 decodes the cross-implementation vector (fixtures/expected/go1.json v2)", function()
+  boot()
+  -- Byte-identical to the shared vector; also asserted by Rust + Python.
+  local r, err = GO.Bridge.DecodeRouteString("GO1.2346.3.426138500505123889.305")
+  isTrue(r ~= nil, tostring(err))
+  eq(r.mapID, 2346)
+  eq(#r.waypoints, 3)
+  approx(r.waypoints[1].x, 42.6, 1e-9)
+  approx(r.waypoints[1].y, 13.8, 1e-9)
+  approx(r.waypoints[2].x, 50.0, 1e-9)
+  approx(r.waypoints[2].y, 50.5, 1e-9)
+  approx(r.waypoints[3].x, 12.3, 1e-9)
+  approx(r.waypoints[3].y, 88.9, 1e-9)
+end)
+
 test("GO1 rejects tampered checksum + bad shapes", function()
   boot()
   local code = GO.Bridge.EncodeRoute(1, { { x = 1, y = 2 }, { x = 3, y = 4 } })

@@ -1,0 +1,171 @@
+{
+  "note": "Inputs hand-written; expects reviewed by hand (see P4 notes), asserted by both verify-algorithms.py and Rust route tests.",
+  "cases": [
+    {
+      "id": "hand-9",
+      "observations": [
+        {
+          "x": 10,
+          "y": 10,
+          "resource": "ore-test",
+          "unit": 50000,
+          "yield": 2.0,
+          "spawn": 0.8,
+          "confidence": 0.6
+        },
+        {
+          "x": 11,
+          "y": 10,
+          "resource": "ore-test",
+          "unit": 50000,
+          "yield": 2.0,
+          "spawn": 0.8,
+          "confidence": 0.6
+        },
+        {
+          "x": 10,
+          "y": 11,
+          "resource": "ore-test",
+          "unit": 50000,
+          "yield": 2.0,
+          "spawn": 0.8,
+          "confidence": 0.6
+        },
+        {
+          "x": 11,
+          "y": 11,
+          "resource": "ore-test",
+          "unit": 50000,
+          "yield": 2.0,
+          "spawn": 0.8,
+          "confidence": 0.6
+        },
+        {
+          "x": 12,
+          "y": 12,
+          "resource": "herb-test",
+          "unit": 120000,
+          "yield": 2.0,
+          "spawn": 0.8,
+          "confidence": 0.6
+        },
+        {
+          "x": 13,
+          "y": 12,
+          "resource": "herb-test",
+          "unit": 120000,
+          "yield": 2.0,
+          "spawn": 0.8,
+          "confidence": 0.6
+        },
+        {
+          "x": 50,
+          "y": 50,
+          "resource": "ore-test",
+          "unit": 50000,
+          "yield": 2.0,
+          "spawn": 0.8,
+          "confidence": 0.6
+        },
+        {
+          "x": 51,
+          "y": 50,
+          "resource": "ore-test",
+          "unit": 50000,
+          "yield": 2.0,
+          "spawn": 0.8,
+          "confidence": 0.6
+        },
+        {
+          "x": 50,
+          "y": 51,
+          "resource": "ore-test",
+          "unit": 50000,
+          "yield": 2.0,
+          "spawn": 0.8,
+          "confidence": 0.6
+        }
+      ],
+      "config": {
+        "cellSize": 4.0,
+        "maxDiameter": 14.0,
+        "minSamples": 2
+      },
+      "expect": {
+        "count": 2,
+        "dropped": 0,
+        "sizes": [
+          6,
+          3
+        ],
+        "centroids": [
+          [
+            11.166666666666666,
+            11.0
+          ],
+          [
+            50.333333333333336,
+            50.333333333333336
+          ]
+        ],
+        "values": [
+          563200.0,
+          192000.0
+        ]
+      }
+    },
+    {
+      "id": "singleton-pruned",
+      "observations": [
+        {
+          "x": 10,
+          "y": 10,
+          "resource": "ore-test",
+          "unit": 50000,
+          "yield": 2.0,
+          "spawn": 0.8,
+          "confidence": 0.6
+        },
+        {
+          "x": 11,
+          "y": 10,
+          "resource": "ore-test",
+          "unit": 50000,
+          "yield": 2.0,
+          "spawn": 0.8,
+          "confidence": 0.6
+        },
+        {
+          "x": 90,
+          "y": 90,
+          "resource": "ore-test",
+          "unit": 50000,
+          "yield": 2.0,
+          "spawn": 0.8,
+          "confidence": 0.6
+        }
+      ],
+      "config": {
+        "cellSize": 4.0,
+        "maxDiameter": 14.0,
+        "minSamples": 2
+      },
+      "expect": {
+        "count": 1,
+        "dropped": 1,
+        "sizes": [
+          2
+        ],
+        "centroids": [
+          [
+            10.5,
+            10.0
+          ]
+        ],
+        "values": [
+          128000.0
+        ]
+      }
+    }
+  ]
+}

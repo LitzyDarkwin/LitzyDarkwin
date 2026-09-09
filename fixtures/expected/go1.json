@@ -1,0 +1,37 @@
+{
+  "note": "v1 checksum hand-verified (34); asserted by Python, Rust, and the Lua harness.",
+  "vectors": [
+    {
+      "map": 1,
+      "waypoints": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "code": "GO1.1.2.000000010010.034"
+    },
+    {
+      "map": 2346,
+      "waypoints": [
+        [
+          42.6,
+          13.8
+        ],
+        [
+          50.0,
+          50.5
+        ],
+        [
+          12.3,
+          88.9
+        ]
+      ],
+      "code": "GO1.2346.3.426138500505123889.305"
+    }
+  ]
+}

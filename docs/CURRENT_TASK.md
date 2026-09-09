@@ -1,8 +1,9 @@
 # CURRENT TASK
 
-**Phase 4 — Economic route engine.**
+**Phase 5 — Market engine (TSM EU).**
 
-Objective: Rust cluster/optimize/simulate pipeline (deterministic, seeded) +
-route persistence + fixtures/expected + Routes UI (generate, compare, save,
-edit/exclude). Validate: frontend suite + verify-algorithms; Rust in CI.
+Objective: TSM public-data provider (commodities CSV + region items),
+market-values table, EffectiveRouteValue pipeline (§5: spike clamp, freshness
+penalty, confidence), market refresh commands + Market UI (prices, freshness,
+per-item detail). Validate: frontend suite + valuation fixtures; Rust in CI.
 Then commit.

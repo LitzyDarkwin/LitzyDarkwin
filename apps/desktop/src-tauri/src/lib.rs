@@ -4,10 +4,13 @@
 //! HTTP fetching, and error translation. Domain commands are added per phase.
 
 use serde::Serialize;
+use std::collections::HashMap;
 use std::path::{Path, PathBuf};
 use std::sync::{Mutex, MutexGuard};
 use tauri::{Manager, State};
-use wowgoldfarm_core::{atlas, bridge, diagnostics, migrations, models, seed, settings, storage};
+use wowgoldfarm_core::{
+    atlas, bridge, diagnostics, migrations, models, routes, seed, settings, storage,
+};
 
 /// Shared application state: one SQLite connection behind a mutex (rusqlite
 /// connections are `Send`, and all DB access is short + synchronous).
@@ -171,6 +174,91 @@ fn get_zone_observations(
     atlas::zone_observations(&db, &zone_id, &resource_ids, grid).map_err(user_err)
 }
 
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn generate_routes(
+    state: State<'_, AppState>,
+    zone_id: String,
+    resource_ids: Vec<String>,
+    config: routes::RouteConfigDto,
+    prices: HashMap<String, i64>,
+    excluded: Vec<routes::ExcludedArea>,
+) -> Result<Vec<routes::CandidateDto>, String> {
+    let db = lock_db(&state)?;
+    let cfg = config.into_config();
+    routes::generate(&db, &zone_id, &resource_ids, &cfg, &prices, &excluded).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn save_route(
+    state: State<'_, AppState>,
+    input: routes::SaveRouteInput,
+) -> Result<routes::SavedRoute, String> {
+    let db = lock_db(&state)?;
+    routes::save_route(&db, &input, models::now_unix()).map_err(user_err)
+}
+
+#[tauri::command]
+fn list_routes(
+    state: State<'_, AppState>,
+    zone_id: Option<String>,
+) -> Result<Vec<routes::RouteSummary>, String> {
+    let db = lock_db(&state)?;
+    routes::list_routes(&db, zone_id.as_deref()).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn get_route(state: State<'_, AppState>, id: String) -> Result<routes::SavedRoute, String> {
+    let db = lock_db(&state)?;
+    routes::get_route(&db, &id).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn delete_route(state: State<'_, AppState>, id: String) -> Result<bool, String> {
+    let db = lock_db(&state)?;
+    routes::delete_route(&db, &id).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn compare_routes(
+    state: State<'_, AppState>,
+    ids: Vec<String>,
+) -> Result<Vec<routes::SavedRoute>, String> {
+    let db = lock_db(&state)?;
+    routes::compare_routes(&db, &ids).map_err(user_err)
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct RouteExport {
+    pub code: String,
+    pub map_id: i64,
+    pub waypoint_count: usize,
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn export_route_string(
+    state: State<'_, AppState>,
+    id: String,
+) -> Result<RouteExport, String> {
+    let db = lock_db(&state)?;
+    let route = routes::get_route(&db, &id).map_err(user_err)?;
+    let zone = route.zone_id.clone().ok_or_else(|| {
+        "Route has no zone — cannot build an in-game import code.".to_string()
+    })?;
+    let map_id = routes::zone_map_id(&db, &zone)
+        .map_err(user_err)?
+        .ok_or_else(|| format!("Zone `{zone}` has no map id — cannot build an import code."))?;
+    let pts: Vec<(f64, f64)> = route.waypoints.iter().map(|w| (w.x, w.y)).collect();
+    let code = routes::go1_encode(map_id, &pts).map_err(user_err)?;
+    Ok(RouteExport { code, map_id, waypoint_count: pts.len() })
+}
+
 fn init_logging(app_dir: &std::path::Path) {
     // Dev: stderr. Prod file log is added in Phase 9 diagnostics work.
     let _ = app_dir;
@@ -229,7 +317,14 @@ pub fn run() {
             get_atlas_tree,
             search_resources,
             get_zone_detail,
-            get_zone_observations
+            get_zone_observations,
+            generate_routes,
+            save_route,
+            list_routes,
+            get_route,
+            delete_route,
+            compare_routes,
+            export_route_string
         ])
         .run(tauri::generate_context!())
         // Process entry point: nothing recoverable to do if the runtime fails.

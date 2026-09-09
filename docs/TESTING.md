@@ -44,5 +44,9 @@
 | cargo    | ❌ (no toolchain; hosts blocked) | ✅ | ✅ |
 | tauri build | ❌             | —           | ✅           |
 
-Rust/Tauri validation is delegated to CI with pinned toolchains; every Rust test
-assertion is additionally cross-checked against Python-computed fixtures.
+Rust/Tauri validation is delegated to CI with pinned toolchains. Fixture
+provenance: inputs are hand-written with hand-verifiable geometry; expected
+values are produced by the Python verifier and reviewed by hand for magnitude
+(cluster sizes/counts/orders are exact hand checks); Rust tests assert the same
+file. The check that matters is Rust↔Python agreement — a transcription error
+in either implementation fails loudly.

@@ -205,3 +205,112 @@ export interface DiagnosticReport {
   routeCount: number;
   warnings: string[];
 }
+
+/** Partial optimizer config from the UI; backend fills defaults + clamps. */
+export interface RouteConfigDto {
+  seed?: number | null;
+  cellSize?: number | null;
+  maxDiameter?: number | null;
+  minSamples?: number | null;
+  maxClusters?: number | null;
+  candidateStarts?: number | null;
+  twoOptPasses?: number | null;
+  travelSpeedYps?: number | null;
+  gatherSeconds?: number | null;
+  loopOverheadSeconds?: number | null;
+}
+
+export interface RouteConfig {
+  seed: number;
+  cellSize: number;
+  maxDiameter: number;
+  minSamples: number;
+  maxClusters: number;
+  candidateStarts: number;
+  twoOptPasses: number;
+  travelSpeedYps: number;
+  gatherSeconds: number;
+  loopOverheadSeconds: number;
+}
+
+export interface ExcludedArea {
+  x: number;
+  y: number;
+  radius: number;
+}
+
+export interface Waypoint {
+  x: number;
+  y: number;
+  clusterId: string;
+  value: number;
+}
+
+export interface Band {
+  p10: number;
+  median: number;
+  p90: number;
+}
+
+export interface RouteStats {
+  loopYards: number;
+  loopSeconds: number;
+  nodes: number;
+  qty: number;
+  grossValue: number;
+  effectiveValue: number;
+  gphExpected: number;
+  gphConservative: number;
+  bandHourly: Band;
+  resolvedPrices: Record<string, number>;
+  prunedClusters: number;
+  droppedPoints: number;
+  warnings: string[];
+}
+
+export interface RouteCandidate {
+  rank: number;
+  waypoints: Waypoint[];
+  stats: RouteStats;
+  /** Effective config (post-defaults, post-clamp) so saves reproduce exactly. */
+  config: RouteConfig;
+}
+
+export interface SavedRoute {
+  id: string;
+  name: string;
+  zoneId: string | null;
+  resourceIds: string[];
+  waypoints: Waypoint[];
+  excluded: ExcludedArea[];
+  config: RouteConfig;
+  stats: RouteStats;
+  createdAt: number;
+  updatedAt: number;
+}
+
+export interface RouteSummary {
+  id: string;
+  name: string;
+  zoneId: string | null;
+  zoneName: string | null;
+  gphExpected: number;
+  waypointCount: number;
+  updatedAt: number;
+}
+
+export interface SaveRouteInput {
+  name: string;
+  zoneId: string | null;
+  resourceIds: string[];
+  waypoints: Waypoint[];
+  excluded: ExcludedArea[];
+  config: RouteConfig;
+  stats: RouteStats;
+}
+
+export interface RouteExport {
+  code: string;
+  mapId: number;
+  waypointCount: number;
+}

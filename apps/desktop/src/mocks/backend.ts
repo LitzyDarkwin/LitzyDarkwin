@@ -9,12 +9,16 @@
 
 import type {
   DiagnosticReport,
+  RouteSummary,
+  SaveRouteInput,
+  SavedRoute,
   Settings,
   SyncReport,
   SyncStateInfo,
   WowDetection,
 } from '../types/domain';
 import { MOCK_TREE, mockObservations, mockSearch, mockZoneDetail } from './atlas-data';
+import { MOCK_CANDIDATES, MOCK_ROUTE_CONFIG, mockSavedRoute } from './routes-data';
 
 type Handler = (args?: Record<string, unknown>) => unknown;
 
@@ -26,6 +30,7 @@ interface MockState {
   lastSyncAt: number | null;
   lastExportAt: number | null;
   lastResult: string | null;
+  routes: SavedRoute[];
 }
 
 function defaultState(): MockState {
@@ -45,6 +50,7 @@ function defaultState(): MockState {
     lastSyncAt: null,
     lastExportAt: null,
     lastResult: null,
+    routes: [mockSavedRoute()],
   };
 }
 
@@ -190,6 +196,91 @@ const handlers: Record<string, Handler> = {
       ((args?.resourceIds as string[] | undefined) ?? []) as string[],
       Number(args?.grid ?? 20),
     ),
+
+  generate_routes: (args) => {
+    const resourceIds = ((args?.resourceIds as string[] | undefined) ?? []) as string[];
+    if (resourceIds.length === 0) throw new Error('select at least one resource');
+    const prices = ((args?.prices as Record<string, number> | undefined) ?? {}) as Record<
+      string,
+      number
+    >;
+    const missing = resourceIds.filter((id) => !(id in prices));
+    if (missing.length > 0) throw new Error(`missing prices for: ${missing.join(', ')}`);
+    return MOCK_CANDIDATES;
+  },
+
+  save_route: (args) => {
+    const input = args?.input as SaveRouteInput;
+    if (!input || input.name.trim().length === 0) throw new Error('route name is empty');
+    if (input.waypoints.length < 2 || input.waypoints.length > 64) {
+      throw new Error('routes need 2–64 waypoints');
+    }
+    const now = NOW();
+    const saved: SavedRoute = {
+      id: `rt-mock-${now}-${mockState.routes.length + 1}`,
+      name: input.name.trim(),
+      zoneId: input.zoneId ?? null,
+      resourceIds: [...input.resourceIds],
+      waypoints: input.waypoints.map((w) => ({ ...w })),
+      excluded: (input.excluded ?? []).map((e) => ({ ...e })),
+      config: { ...MOCK_ROUTE_CONFIG, ...(input.config ?? {}) },
+      stats: { ...input.stats },
+      createdAt: now,
+      updatedAt: now,
+    };
+    mockState.routes.push(saved);
+    return saved;
+  },
+
+  list_routes: (args) => {
+    const zoneId = (args?.zoneId as string | null | undefined) ?? null;
+    const rows = zoneId ? mockState.routes.filter((r) => r.zoneId === zoneId) : mockState.routes;
+    return rows.map(
+      (r): RouteSummary => ({
+        id: r.id,
+        name: r.name,
+        zoneId: r.zoneId,
+        zoneName: null,
+        gphExpected: r.stats.gphExpected,
+        waypointCount: r.waypoints.length,
+        updatedAt: r.updatedAt,
+      }),
+    );
+  },
+
+  get_route: (args) => {
+    const found = mockState.routes.find((r) => r.id === String(args?.id ?? ''));
+    if (!found) throw new Error(`unknown route \`${String(args?.id ?? '')}\``);
+    return found;
+  },
+
+  delete_route: (args) => {
+    const idx = mockState.routes.findIndex((r) => r.id === String(args?.id ?? ''));
+    if (idx < 0) return false;
+    mockState.routes.splice(idx, 1);
+    return true;
+  },
+
+  compare_routes: (args) => {
+    const ids = ((args?.ids as string[] | undefined) ?? []) as string[];
+    if (ids.length === 0 || ids.length > 4) throw new Error('compare 1–4 routes');
+    return ids.map((id) => {
+      const found = mockState.routes.find((r) => r.id === id);
+      if (!found) throw new Error(`unknown route \`${id}\``);
+      return found;
+    });
+  },
+
+  export_route_string: (args) => {
+    const found = mockState.routes.find((r) => r.id === String(args?.id ?? ''));
+    if (!found) throw new Error(`unknown route \`${String(args?.id ?? '')}\``);
+    // Fixed sample: the real v2 vector from fixtures/expected/go1.json.
+    return {
+      code: 'GO1.2346.3.426138500505123889.305',
+      mapId: 2346,
+      waypointCount: found.waypoints.length,
+    };
+  },
 };
 
 export function hasMock(cmd: string): boolean {

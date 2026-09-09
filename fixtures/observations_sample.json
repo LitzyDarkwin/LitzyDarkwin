@@ -1,0 +1,74 @@
+{
+  "note": "DB-shaped twin of the hand-9 geometry; Rust pipeline tests load this.",
+  "zone": {
+    "id": "zone-test",
+    "name": "Test Zone",
+    "mapId": 1,
+    "yardsPerUnit": 10.0
+  },
+  "observations": [
+    {
+      "x": 10,
+      "y": 10,
+      "resource": "ore-test",
+      "yield": 2.0,
+      "source": "seed"
+    },
+    {
+      "x": 11,
+      "y": 10,
+      "resource": "ore-test",
+      "yield": 2.0,
+      "source": "seed"
+    },
+    {
+      "x": 10,
+      "y": 11,
+      "resource": "ore-test",
+      "yield": 2.0,
+      "source": "seed"
+    },
+    {
+      "x": 11,
+      "y": 11,
+      "resource": "ore-test",
+      "yield": 2.0,
+      "source": "seed"
+    },
+    {
+      "x": 12,
+      "y": 12,
+      "resource": "herb-test",
+      "yield": 2.0,
+      "source": "seed"
+    },
+    {
+      "x": 13,
+      "y": 12,
+      "resource": "herb-test",
+      "yield": 2.0,
+      "source": "seed"
+    },
+    {
+      "x": 50,
+      "y": 50,
+      "resource": "ore-test",
+      "yield": 2.0,
+      "source": "seed"
+    },
+    {
+      "x": 51,
+      "y": 50,
+      "resource": "ore-test",
+      "yield": 2.0,
+      "source": "seed"
+    },
+    {
+      "x": 50,
+      "y": 51,
+      "resource": "ore-test",
+      "yield": 2.0,
+      "source": "seed"
+    }
+  ]
+}

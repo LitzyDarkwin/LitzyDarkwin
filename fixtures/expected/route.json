@@ -1,0 +1,166 @@
+{
+  "note": "Same provenance as cluster.json; square case pins the FNV seed tie-break (c1 wins) and 2-opt repair of [0,3,1,2].",
+  "cases": [
+    {
+      "id": "two-cluster",
+      "clusters": [
+        {
+          "id": "c0",
+          "x": 11.166666666666666,
+          "y": 11.0,
+          "members": 6,
+          "qty": 9.6,
+          "gross": 704000.0,
+          "effective": 563200.0,
+          "memberValues": [
+            64000.0,
+            64000.0,
+            64000.0,
+            64000.0,
+            153600.0,
+            153600.0
+          ],
+          "confidence": 0.6
+        },
+        {
+          "id": "c1",
+          "x": 50.333333333333336,
+          "y": 50.333333333333336,
+          "members": 3,
+          "qty": 4.800000000000001,
+          "gross": 240000.0,
+          "effective": 192000.0,
+          "memberValues": [
+            64000.0,
+            64000.0,
+            64000.0
+          ],
+          "confidence": 0.6
+        }
+      ],
+      "ypu": 10.0,
+      "start": 0,
+      "config": {
+        "seed": 20260909,
+        "travelSpeedYps": 7.0,
+        "gatherSeconds": 3.5,
+        "loopOverheadSeconds": 15.0,
+        "twoOptPasses": 8
+      },
+      "expect": {
+        "nnOrder": [
+          0,
+          1
+        ],
+        "optOrder": [
+          0,
+          1
+        ],
+        "loopYards": 1110.160148607198,
+        "loopSeconds": 205.0943069438854,
+        "gphExpected": 13255950.594200803,
+        "gphConservative": 7518428.288328223,
+        "band": [
+          7518428.288328223,
+          13255950.594200803,
+          18993472.900073383
+        ]
+      }
+    },
+    {
+      "id": "two-opt-square",
+      "clusters": [
+        {
+          "id": "c0",
+          "x": 0,
+          "y": 0,
+          "members": 1,
+          "qty": 1.6,
+          "gross": 1000.0,
+          "effective": 1000.0,
+          "memberValues": [
+            1000.0
+          ],
+          "confidence": 1.0
+        },
+        {
+          "id": "c1",
+          "x": 100,
+          "y": 0,
+          "members": 1,
+          "qty": 1.6,
+          "gross": 1000.0,
+          "effective": 1000.0,
+          "memberValues": [
+            1000.0
+          ],
+          "confidence": 1.0
+        },
+        {
+          "id": "c2",
+          "x": 0,
+          "y": 100,
+          "members": 1,
+          "qty": 1.6,
+          "gross": 1000.0,
+          "effective": 1000.0,
+          "memberValues": [
+            1000.0
+          ],
+          "confidence": 1.0
+        },
+        {
+          "id": "c3",
+          "x": 100,
+          "y": 100,
+          "members": 1,
+          "qty": 1.6,
+          "gross": 1000.0,
+          "effective": 1000.0,
+          "memberValues": [
+            1000.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "ypu": 1.0,
+      "start": 0,
+      "config": {
+        "seed": 20260909,
+        "travelSpeedYps": 7.0,
+        "gatherSeconds": 3.5,
+        "loopOverheadSeconds": 15.0,
+        "twoOptPasses": 8
+      },
+      "expect": {
+        "nnOrder": [
+          0,
+          1,
+          3,
+          2
+        ],
+        "optOrder": [
+          0,
+          1,
+          3,
+          2
+        ],
+        "loopYards": 400.0,
+        "loopSeconds": 86.14285714285714,
+        "gphExpected": 167164.17910447763,
+        "gphConservative": 129674.01390347141,
+        "band": [
+          129674.01390347141,
+          167164.17910447763,
+          204654.34430548383
+        ]
+      },
+      "initialOrder": [
+        0,
+        3,
+        1,
+        2
+      ]
+    }
+  ]
+}
