@@ -12,6 +12,7 @@ expected to ~1e-12; tolerances below only absorb last-ulp platform drift.
 Only fixtures with a registered verifier below are accepted — anything else
 fails. Verifiers land with their phase (cluster/route/go1: P4).
 """
+import csv
 import json
 import math
 import sys
@@ -348,11 +349,175 @@ def verify_go1(fx: dict) -> None:
         check_eq(f"go1[{i}].code", got, vec["code"])
 
 
+# --- valuation (ALGORITHMS.md §5) ---------------------------------------------------
+
+VAL_CFG = {
+    "spike_clamp": 2.5,
+    "spike_floor": 1.0 / 3.0,
+    "refresh_hours": 12.0,
+    "stale_floor": 0.5,
+    "haircut_base": 0.90,
+    "haircut_liquidity": 0.10,
+}
+
+
+def py_round(x: float) -> int:
+    """Positive-only round-half-up, matching Rust f64::round on positives."""
+    return math.floor(x + 0.5)
+
+
+def py_classify(ts, now: int) -> str:
+    if ts is None or ts <= 0:
+        return "unknown"
+    age = max(now - ts, 0)
+    if age <= 12 * 3600:
+        return "fresh"
+    if age <= 72 * 3600:
+        return "aging"
+    return "stale"
+
+
+def py_valuate(s, cfg: dict, now: int) -> dict:
+    """Mirror of market::valuate (signals use camelCase fixture keys)."""
+    if s is None or all(s[k] <= 0 for k in
+                        ["marketValue", "minBuyout", "recent", "historical", "avgSalePrice"]):
+        return {"market": 0, "conservative": 0, "effective": 0, "confidence": 0.0,
+                "flags": ["no-data"], "freshness": "unknown"}
+    flags: list = []
+    live = max(s["marketValue"], 0)
+    baseline = max(max(s["historical"], 0), max(s["avgSalePrice"], 0))
+    clamped = float(live)
+    if baseline > 0 and live > 0:
+        hi = baseline * max(cfg["spike_clamp"], 1.0)
+        lo = baseline * min(max(cfg["spike_floor"], 0.0), 1.0)
+        if live > hi:
+            clamped = hi
+            flags.append("spiked")
+        elif live < lo:
+            clamped = lo
+            flags.append("floored")
+    else:
+        if baseline <= 0:
+            flags.append("no-baseline")
+        if live <= 0:
+            flags.append("live-unknown")
+    basket = []
+    if clamped > 0:
+        basket.append(("market", clamped))
+    for key, name in [("minBuyout", "min-buyout"), ("avgSalePrice", "avg-sale"),
+                      ("historical", "historical")]:
+        if s[key] > 0:
+            basket.append((name, float(s[key])))
+    if not basket:
+        flags.append("recent-only")
+        pre = max(s["recent"], 0)
+    else:
+        basket.sort(key=lambda t: t[1])
+        pre = basket[0][1]
+    haircut = cfg["haircut_base"] + cfg["haircut_liquidity"] * min(max(s["saleRate"], 0.0), 1.0)
+    conservative = py_round(pre * haircut)
+    data_ts = max(s["marketUpdatedAt"], s["regionUpdatedAt"], s["fetchedAt"])
+    if data_ts <= 0:
+        flags.append("unknown-age")
+        freshness, penalty = "unknown", cfg["stale_floor"]
+    else:
+        age_hours = max(now - data_ts, 0) / 3600.0
+        over = age_hours / max(cfg["refresh_hours"], 0.5)
+        penalty = 1.0 if over <= 1.0 else max(cfg["stale_floor"], 1.0 - 0.125 * (over - 1.0))
+        if penalty < 1.0:
+            flags.append("stale")
+        freshness = py_classify(data_ts, now)
+    effective = py_round(conservative * penalty)
+    positives = [float(s[k]) for k in
+                 ["marketValue", "minBuyout", "recent", "historical", "avgSalePrice"] if s[k] > 0]
+    coverage = len(positives) / 5.0
+    if len(positives) >= 2:
+        mean = sum(positives) / len(positives)
+        var = 0.0
+        for x in positives:
+            var += (x - mean) * (x - mean)
+        var /= len(positives)
+        agreement = max(1.0 - math.sqrt(var) / mean, 0.0)
+    else:
+        agreement = 0.5
+    liquidity = 0.5 * min(max(s["soldPerDay"] / 20.0, 0.0), 1.0) \
+        + 0.5 * min(max(s["saleRate"], 0.0), 1.0)
+    if s["soldPerDay"] < 1.0:
+        flags.append("thin")
+    confidence = 0.35 * agreement + 0.25 * liquidity + 0.25 * penalty + 0.15 * coverage
+    return {"market": py_round(clamped), "conservative": conservative, "effective": effective,
+            "confidence": min(max(confidence, 0.0), 1.0), "flags": flags, "freshness": freshness}
+
+
+def load_csv_signals(item_id: int) -> dict:
+    """Merge sample CSV rows exactly like ingest does (live + daily columns)."""
+    comm = region = None
+    with open(ROOT / "fixtures" / "tsm_commodities_sample.csv", newline="") as f:
+        for row in csv.DictReader(f):
+            try:
+                if int(row["itemId"]) == item_id:
+                    comm = row
+            except ValueError:
+                continue
+    with open(ROOT / "fixtures" / "tsm_region_sample.csv", newline="") as f:
+        for row in csv.DictReader(f):
+            if int(row["itemId"]) == item_id:
+                region = row
+    if comm is None:
+        raise AssertionError(f"item {item_id} missing from commodity sample")
+    from datetime import datetime, timezone
+
+    def ts(raw: str) -> int:
+        return int(datetime.fromisoformat(raw.replace("Z", "+00:00")).timestamp())
+
+    def num(raw) -> int:
+        raw = (raw or "").strip()
+        return int(raw) if raw else 0
+
+    s = {
+        "marketValue": num(comm["marketValue"]),
+        "minBuyout": num(comm["minBuyout"]),
+        "recent": num(comm["recent"]),
+        "historical": num(comm["historical"]),
+        "marketUpdatedAt": ts(comm["updatedAt"]),
+        "avgSalePrice": 0,
+        "saleRate": 0.0,
+        "soldPerDay": 0.0,
+        "regionUpdatedAt": 0,
+        "fetchedAt": 0,
+    }
+    if region is not None:
+        s["avgSalePrice"] = num(region["avgSalePrice"])
+        s["saleRate"] = float(region["saleRate"] or 0.0)
+        s["soldPerDay"] = float(region["soldPerDay"] or 0.0)
+        s["regionUpdatedAt"] = ts(region["updatedAt"])
+    s["fetchedAt"] = s["marketUpdatedAt"]
+    return s
+
+
+def verify_valuation(fx: dict) -> None:
+    for case in fx["cases"]:
+        cid = case["id"]
+        if "csvItem" in case:
+            s = load_csv_signals(case["csvItem"])
+        else:
+            s = case["signals"]
+        got = py_valuate(s, VAL_CFG, case["now"])
+        ex = case["expect"]
+        check_eq(f"valuation[{cid}].market", got["market"], ex["market"])
+        check_eq(f"valuation[{cid}].conservative", got["conservative"], ex["conservative"])
+        check_eq(f"valuation[{cid}].effective", got["effective"], ex["effective"])
+        check(f"valuation[{cid}].confidence", got["confidence"], ex["confidence"], 1e-9)
+        check_eq(f"valuation[{cid}].flags", got["flags"], ex["flags"])
+        check_eq(f"valuation[{cid}].freshness", got["freshness"], ex["freshness"])
+
+
 VERIFIERS = {
     "geo.json": verify_geo,
     "cluster.json": verify_cluster,
     "route.json": verify_route,
     "go1.json": verify_go1,
+    "valuation.json": verify_valuation,
 }
 
 

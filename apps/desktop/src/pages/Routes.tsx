@@ -10,6 +10,7 @@ import {
   formatInt,
   formatQty,
 } from '../lib/format';
+import { getMarketPrices } from '../lib/market-api';
 import {
   compareRoutes,
   deleteRoute,
@@ -65,6 +66,8 @@ export default function RoutesPage() {
 
   // Prices (gold per unit, keyed by resource id) + optimizer config ---------
   const [prices, setPrices] = useState<Record<string, string>>({});
+  const [filling, setFilling] = useState(false);
+  const [fillNote, setFillNote] = useState<string | null>(null);
   const [cfgSeed, setCfgSeed] = useState('20260909');
   const [cfgSpeed, setCfgSpeed] = useState('7');
   const [cfgGather, setCfgGather] = useState('3.5');
@@ -162,6 +165,33 @@ export default function RoutesPage() {
 
   const toggleSelected = (id: string) => {
     setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+  };
+
+  const onFillMarket = async () => {
+    setFillNote(null);
+    if (selected.length === 0) {
+      setFillNote('Select at least one resource first.');
+      return;
+    }
+    setFilling(true);
+    try {
+      const out = await getMarketPrices(selected);
+      setPrices((prev) => {
+        const next = { ...prev };
+        for (const [id, copper] of Object.entries(out.prices)) {
+          next[id] = String(copper / GOLD);
+        }
+        return next;
+      });
+      const filled = Object.keys(out.prices).length;
+      const parts = [`Filled ${filled} price(s) from market.`];
+      if (out.missing.length > 0) parts.push(`Missing: ${out.missing.join('; ')}.`);
+      setFillNote(parts.join(' '));
+    } catch (e: unknown) {
+      setFillNote(toMessage(e));
+    } finally {
+      setFilling(false);
+    }
   };
 
   const onGenerate = async () => {
@@ -342,9 +372,22 @@ export default function RoutesPage() {
                 />
               </div>
             ))}
-            <div className="hint">
-              Manual prices for now — the market engine (Phase 5) will fill these in.
+            <div className="btn-row">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-testid="fill-market-btn"
+                disabled={filling}
+                onClick={onFillMarket}
+              >
+                {filling ? 'Filling…' : 'Fill prices from market'}
+              </button>
             </div>
+            {fillNote && (
+              <div className="hint" data-testid="fill-note">
+                {fillNote}
+              </div>
+            )}
           </div>
           <div className="field">
             <span className="field-label">Optimizer (optional overrides)</span>

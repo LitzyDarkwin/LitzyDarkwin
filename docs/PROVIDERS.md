@@ -4,13 +4,22 @@ All external data is untrusted: validate, normalize, attribute, timestamp.
 
 ## Market — TSM public data (primary)
 - Base: `https://public-data.tradeskillmaster.com/{gameType}/{region}/…`
-- Retail EU datasets:
-  - `retail/eu/commodities.csv` (columns incl. `itemID,minBuyout,marketValue,historical,…`)
-  - `retail/eu/region/items.csv` (columns incl. `itemID,marketValue,historical,saleAvg,…`)
-- No API key, no rate limits (public static files). Refresh cadence observed ~daily;
-  treat as volatile: record `fetched_at` + provider-reported timestamps, never assume.
-- Contract in core: `MarketProvider { id(), datasets(), parse(dataset, bytes) }`;
-  fetching via `HttpFetcher` (shell). Malformed rows are skipped + counted, never fatal.
+  (verified 2026-09-09 against the official column docs).
+- Retail EU datasets consumed:
+  - `retail/eu/commodities.csv` (~every 3 h):
+    `itemId,name,marketValue,minBuyout,recent,historical,updatedAt`
+  - `retail/eu/region/items.csv` (~daily):
+    `itemId,name,marketValue,historical,avgSalePrice,saleRate,soldPerDay,updatedAt`
+  - All prices in copper; `updatedAt` is ISO-8601 UTC and identical for every
+    row in a file (upstream scan time, not fetch time).
+- No API key, no rate limits (public static files). Record `fetched_at` plus
+  the provider `updatedAt`; never assume cadence.
+- Core (`market.rs`): dependency-free CSV + strict-header parsing (bad header =
+  loud failure, provider format drift is never silent); malformed rows skipped
+  + counted. Ingest is transactional per dataset; the old cache survives any
+  failure. Region stats never touch the live columns.
+- Fetching in the shell (`refresh_market`, reqwest blocking, 60 s timeout):
+  both files fetched before any DB write; partial success reported per dataset.
 - Fallback chain: fresh cache → stale cache (penalized) → Unknown (explicit risk).
 
 ## Atlas seed data — bundled provider

@@ -60,16 +60,29 @@ ExpectedNodeValue =
 
 ## 5. Market valuation (market.rs)
 
-Inputs per item: marketValue, minBuyout, historical, saleAvg, saleRate?, quantity?,
-`market_updated_at`, `region_updated_at`.
+Inputs per item: marketValue, minBuyout, recent, historical (live file),
+avgSalePrice, saleRate, soldPerDay (region file), `market_updated_at`,
+`region_updated_at`, `fetched_at`. Tunables in `ValuationConfig` (defaults below).
 
-- `MarketValue` = preferred live signal (commodities → marketValue/minBuyout composite).
-- `ConservativeSellValue` = min(MarketValue, saleAvg?, historical) with liquidity haircut.
-- `EffectiveRouteValue` = ConservativeSellValue × freshness penalty × spike clamp.
-- Spike protection: if `MarketValue > clamp × max(historical, saleAvg)` (default clamp 2.5),
-  pin to clamp × baseline and degrade confidence; symmetric floor at 1/3.
-- Confidence from: signal agreement, sale volume/rate, recency, provider health.
-- Stale data usable with penalty; missing data → Unknown (route shows risk, never fake price).
+- `MarketValue` = live quote clamped to the baseline band. Baseline =
+  max(historical, avgSalePrice); if live > 2.5 × baseline pin to the ceiling
+  (flag `spiked`), if live < baseline/3 raise to the floor (flag `floored`).
+  No baseline → clamp off (flag `no-baseline`); no live quote → value from
+  history (flag `live-unknown`, display 0).
+- `ConservativeSellValue` = min(clamped market, minBuyout?, avgSale?, historical?)
+  over positive signals × liquidity haircut (0.90 + 0.10 × saleRate).
+  Only `recent` positive → fall back to it (flag `recent-only`).
+- `EffectiveRouteValue` = ConservativeSellValue × freshness penalty, where
+  penalty = 1 while age ≤ refresh_hours (default 12), then
+  max(0.5, 1 − 0.125 × (age/refresh − 1)); flag `stale` below 1.
+- Confidence = 0.35 × agreement + 0.25 × liquidity + 0.25 × recency
+  + 0.15 × coverage: agreement = 1 − CV over positive price signals
+  (0.5 for a single signal); liquidity = 0.5 × soldPerDay/20 + 0.5 × saleRate
+  (clamped); recency = freshness penalty; coverage = signals present / 5.
+  Flag `thin` when soldPerDay < 1.
+- Missing/zero signals → Unknown (zeros, confidence 0, flag `no-data`).
+  Stale data usable with penalty; missing data → Unknown (routes show the
+  gap explicitly, never a fake price).
 
 ## 6. Simulation (routes.rs)
 

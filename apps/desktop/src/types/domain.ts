@@ -314,3 +314,60 @@ export interface RouteExport {
   mapId: number;
   waypointCount: number;
 }
+
+export interface IngestReport {
+  dataset: string;
+  rowsTotal: number;
+  rowsUpserted: number;
+  rowsSkipped: number;
+  snapshotUpdatedAt: number | null;
+}
+
+export interface RefreshSummary {
+  region: string;
+  commodities: IngestReport | null;
+  regionItems: IngestReport | null;
+  errors: string[];
+}
+
+export interface DatasetStatus {
+  dataset: string;
+  updatedAt: number | null;
+  fetchedAt: number | null;
+  freshness: Freshness;
+  failures: number;
+  lastError: string | null;
+}
+
+export interface MarketStatus {
+  provider: string;
+  region: string;
+  itemCount: number;
+  datasets: DatasetStatus[];
+  freshness: Freshness;
+}
+
+export interface ItemValuation {
+  itemId: number;
+  marketValue: number;
+  conservativeValue: number;
+  effectiveValue: number;
+  confidence: number;
+  freshness: Freshness;
+  flags: string[];
+  explain: string[];
+}
+
+export interface MarketItemRow {
+  itemId: number;
+  itemName: string;
+  marketValue: number;
+  effectiveValue: number;
+  confidence: number;
+  freshness: Freshness;
+}
+
+export interface MarketPrices {
+  prices: Record<string, number>;
+  missing: string[];
+}

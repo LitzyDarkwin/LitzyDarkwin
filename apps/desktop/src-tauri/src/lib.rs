@@ -9,7 +9,7 @@ use std::path::{Path, PathBuf};
 use std::sync::{Mutex, MutexGuard};
 use tauri::{Manager, State};
 use wowgoldfarm_core::{
-    atlas, bridge, diagnostics, migrations, models, routes, seed, settings, storage,
+    atlas, bridge, diagnostics, market, migrations, models, routes, seed, settings, storage,
 };
 
 /// Shared application state: one SQLite connection behind a mutex (rusqlite
@@ -259,6 +259,144 @@ fn export_route_string(
     Ok(RouteExport { code, map_id, waypoint_count: pts.len() })
 }
 
+/// Effective region slug: explicit arg wins, else settings. Strict shape —
+/// the slug is interpolated into a URL.
+fn resolve_region(db: &rusqlite::Connection, region: Option<String>) -> Result<String, String> {
+    let slug = match region {
+        Some(r) if !r.trim().is_empty() => r,
+        _ => settings::get_settings(db).map_err(user_err)?.region,
+    };
+    let slug = slug.trim().to_lowercase();
+    if slug.len() < 2
+        || slug.len() > 16
+        || !slug.bytes().all(|b| b.is_ascii_lowercase() || b == b'-')
+    {
+        return Err(format!("Invalid region slug `{slug}`."));
+    }
+    Ok(slug)
+}
+
+fn valuation_cfg(db: &rusqlite::Connection) -> Result<market::ValuationConfig, String> {
+    let hours = settings::get_settings(db).map_err(user_err)?.market_refresh_hours;
+    Ok(market::ValuationConfig {
+        refresh_hours: (hours as f64).clamp(1.0, 168.0),
+        ..Default::default()
+    })
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct RefreshSummary {
+    pub region: String,
+    pub commodities: Option<market::IngestReport>,
+    pub region_items: Option<market::IngestReport>,
+    pub errors: Vec<String>,
+}
+
+/// Fetch both TSM datasets over HTTPS and ingest them. Partial success is
+/// reported honestly; only a total failure becomes an Err.
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn refresh_market(
+    state: State<'_, AppState>,
+    region: Option<String>,
+) -> Result<RefreshSummary, String> {
+    let slug = {
+        let db = lock_db(&state)?;
+        resolve_region(&db, region)?
+    };
+    let client = reqwest::blocking::Client::builder()
+        .timeout(std::time::Duration::from_secs(60))
+        .user_agent(format!("wowgoldfarm/{}", env!("CARGO_PKG_VERSION")))
+        .build()
+        .map_err(|e| format!("HTTP client failed: {e}"))?;
+    let fetch = |url: &str| -> Result<String, String> {
+        client
+            .get(url)
+            .send()
+            .map_err(|e| format!("request failed: {e}"))?
+            .error_for_status()
+            .map_err(|e| format!("HTTP error: {e}"))?
+            .text()
+            .map_err(|e| format!("read failed: {e}"))
+    };
+
+    let mut summary = RefreshSummary {
+        region: slug.clone(),
+        commodities: None,
+        region_items: None,
+        errors: Vec::new(),
+    };
+    // Fetch both files before touching the DB (fail fast on network errors).
+    let comm_text = fetch(&market::commodities_url(&slug));
+    let region_text = fetch(&market::region_items_url(&slug));
+    let mut db = lock_db(&state)?;
+    let now = models::now_unix();
+    match comm_text {
+        Ok(text) => match market::ingest_commodities(&mut db, &slug, &text, now) {
+            Ok(report) => summary.commodities = Some(report),
+            Err(e) => summary.errors.push(format!("commodities: {}", e.user_message())),
+        },
+        Err(e) => summary.errors.push(format!("commodities: {e}")),
+    }
+    match region_text {
+        Ok(text) => match market::ingest_region_items(&mut db, &slug, &text, now) {
+            Ok(report) => summary.region_items = Some(report),
+            Err(e) => summary.errors.push(format!("region items: {}", e.user_message())),
+        },
+        Err(e) => summary.errors.push(format!("region items: {e}")),
+    }
+    if summary.commodities.is_none() && summary.region_items.is_none() {
+        return Err(summary.errors.join(" / "));
+    }
+    Ok(summary)
+}
+
+#[tauri::command]
+fn get_market_status(
+    state: State<'_, AppState>,
+    region: Option<String>,
+) -> Result<market::MarketStatus, String> {
+    let db = lock_db(&state)?;
+    let slug = resolve_region(&db, region)?;
+    market::market_status(&db, &slug, models::now_unix()).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn get_item_valuation(
+    state: State<'_, AppState>,
+    item_id: i64,
+) -> Result<market::ItemValuation, String> {
+    let db = lock_db(&state)?;
+    let cfg = valuation_cfg(&db)?;
+    let signals = market::get_signals(&db, item_id).map_err(user_err)?;
+    Ok(market::valuate(item_id, signals.as_ref(), &cfg, models::now_unix()))
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn search_market_items(
+    state: State<'_, AppState>,
+    query: String,
+    limit: usize,
+) -> Result<Vec<market::MarketItemRow>, String> {
+    let db = lock_db(&state)?;
+    let cfg = valuation_cfg(&db)?;
+    market::search_items(&db, &query, limit, &cfg, models::now_unix()).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn get_market_prices(
+    state: State<'_, AppState>,
+    resource_ids: Vec<String>,
+) -> Result<market::MarketPrices, String> {
+    let db = lock_db(&state)?;
+    let cfg = valuation_cfg(&db)?;
+    market::resolve_prices(&db, &resource_ids, &cfg, models::now_unix()).map_err(user_err)
+}
+
 fn init_logging(app_dir: &std::path::Path) {
     // Dev: stderr. Prod file log is added in Phase 9 diagnostics work.
     let _ = app_dir;
@@ -324,7 +462,12 @@ pub fn run() {
             get_route,
             delete_route,
             compare_routes,
-            export_route_string
+            export_route_string,
+            refresh_market,
+            get_market_status,
+            get_item_valuation,
+            search_market_items,
+            get_market_prices
         ])
         .run(tauri::generate_context!())
         // Process entry point: nothing recoverable to do if the runtime fails.

@@ -35,6 +35,16 @@ describe('Routes page (mock backend)', () => {
     expect((await screen.findByTestId('generate-error')).textContent).toContain('Bismuth');
   });
 
+  it('fills prices from the market', async () => {
+    renderRoutes('/routes?zone=isle-of-dorn&resources=bismuth,mycobloom');
+    await screen.findByTestId('resource-bismuth');
+    fireEvent.click(screen.getByTestId('fill-market-btn'));
+    const note = await screen.findByTestId('fill-note');
+    expect(note.textContent).toContain('Filled 2 price(s)');
+    expect((screen.getByTestId('price-bismuth') as HTMLInputElement).value).toBe('4.6912');
+    expect((screen.getByTestId('price-mycobloom') as HTMLInputElement).value).toBe('10.571');
+  });
+
   it('generates candidates and previews the selected one', async () => {
     await generateWithPrices();
     expect(screen.getByTestId('candidate-2')).toBeDefined();

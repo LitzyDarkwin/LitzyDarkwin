@@ -1,9 +1,7 @@
 # CURRENT TASK
 
-**Phase 5 — Market engine (TSM EU).**
+**Phase 6 — Live session dashboard.**
 
-Objective: TSM public-data provider (commodities CSV + region items),
-market-values table, EffectiveRouteValue pipeline (§5: spike clamp, freshness
-penalty, confidence), market refresh commands + Market UI (prices, freshness,
-per-item detail). Validate: frontend suite + valuation fixtures; Rust in CI.
-Then commit.
+Objective: session tracking (start/pause/resume/stop), live loot feed from
+addon sync, session history + stats, expected-vs-actual GPH comparison,
+session detail UI. Validate: frontend suite + fixtures; Rust in CI. Then commit.

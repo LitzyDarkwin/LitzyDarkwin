@@ -1,0 +1,123 @@
+{
+  "note": "Hand cases reviewed against manual math; csv-* cases merge the TSM sample files like ingest does.",
+  "cases": [
+    {
+      "id": "hand-fresh",
+      "signals": {
+        "marketValue": 100000,
+        "minBuyout": 95000,
+        "recent": 98000,
+        "historical": 80000,
+        "avgSalePrice": 82000,
+        "saleRate": 0.5,
+        "soldPerDay": 10.0,
+        "marketUpdatedAt": 1788868800,
+        "regionUpdatedAt": 1788825600,
+        "fetchedAt": 1788868800
+      },
+      "now": 1788890400,
+      "expect": {
+        "market": 100000,
+        "conservative": 76000,
+        "effective": 76000,
+        "confidence": 0.8429128405929013,
+        "flags": [],
+        "freshness": "fresh"
+      }
+    },
+    {
+      "id": "spiked-stale-thin",
+      "signals": {
+        "marketValue": 300000,
+        "minBuyout": 0,
+        "recent": 0,
+        "historical": 80000,
+        "avgSalePrice": 82000,
+        "saleRate": 0.2,
+        "soldPerDay": 0.5,
+        "marketUpdatedAt": 1788868800,
+        "regionUpdatedAt": 0,
+        "fetchedAt": 1788868800
+      },
+      "now": 1789041600,
+      "expect": {
+        "market": 205000,
+        "conservative": 73600,
+        "effective": 46000,
+        "confidence": 0.38973677545264973,
+        "flags": [
+          "spiked",
+          "stale",
+          "thin"
+        ],
+        "freshness": "aging"
+      }
+    },
+    {
+      "id": "csv-bismuth",
+      "signals": {
+        "marketValue": 52000,
+        "minBuyout": 51000,
+        "recent": 51500,
+        "historical": 50000,
+        "marketUpdatedAt": 1788868800,
+        "avgSalePrice": 49800,
+        "saleRate": 0.42,
+        "soldPerDay": 18.5,
+        "regionUpdatedAt": 1788825600,
+        "fetchedAt": 1788868800
+      },
+      "now": 1788872400,
+      "expect": {
+        "market": 52000,
+        "conservative": 46912,
+        "effective": 46912,
+        "confidence": 0.9122922300156147,
+        "flags": [],
+        "freshness": "fresh"
+      }
+    },
+    {
+      "id": "csv-luredrop",
+      "signals": {
+        "marketValue": 0,
+        "minBuyout": 0,
+        "recent": 0,
+        "historical": 95000,
+        "marketUpdatedAt": 1788868800,
+        "avgSalePrice": 92000,
+        "saleRate": 0.05,
+        "soldPerDay": 0.4,
+        "regionUpdatedAt": 1788825600,
+        "fetchedAt": 1788868800
+      },
+      "now": 1788872400,
+      "expect": {
+        "market": 0,
+        "conservative": 83260,
+        "effective": 83260,
+        "confidence": 0.6631350267379679,
+        "flags": [
+          "live-unknown",
+          "thin"
+        ],
+        "freshness": "fresh"
+      }
+    },
+    {
+      "id": "no-data",
+      "signals": null,
+      "now": 1788868800,
+      "expect": {
+        "market": 0,
+        "conservative": 0,
+        "effective": 0,
+        "confidence": 0.0,
+        "flags": [
+          "no-data"
+        ],
+        "freshness": "unknown"
+      }
+    }
+  ]
+}

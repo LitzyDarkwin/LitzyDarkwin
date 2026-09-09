@@ -185,3 +185,13 @@ input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent);
 .chip { display: inline-flex; gap: 8px; align-items: center; border: 1px solid var(--border); border-radius: 999px; padding: 3px 6px 3px 12px; font-size: 12.5px; background: var(--bg-raised); }
 .chip button { border: none; background: none; color: var(--muted); cursor: pointer; font-size: 15px; line-height: 1; padding: 0 4px; }
 .chip button:hover { color: var(--bad); }
+
+/* Market */
+.badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12.5px; font-weight: 650; }
+.badge-fresh { background: rgba(74, 160, 90, 0.18); color: #7fd09a; }
+.badge-aging { background: rgba(217, 161, 59, 0.18); color: #e8b53a; }
+.badge-stale { background: rgba(220, 60, 60, 0.18); color: #e07a7a; }
+.badge-unavailable, .badge-unknown { background: rgba(130, 140, 155, 0.18); color: #9aa4b2; }
+.conf-bar { display: inline-block; width: 64px; height: 8px; border-radius: 4px; background: var(--bg-sunken); border: 1px solid var(--border); vertical-align: middle; margin-right: 6px; }
+.conf-fill { display: block; height: 100%; border-radius: 4px; background: var(--accent); }
+table.data tr.selected td { background: #20242c; }

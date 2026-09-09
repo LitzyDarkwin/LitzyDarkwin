@@ -14,6 +14,7 @@ Canonical entities (SQLite; migrations in `crates/core/migrations/`, embedded vi
 | 4 | 0004_sessions.sql      | farm_sessions, farm_session_items                           |
 | 5 | 0005_intelligence.sql  | personal_metrics, personal_zone_stats, personal_resource_stats |
 | 6 | 0006_crowd.sql         | crowd_observations (local aggregate cache)                  |
+| 7 | 0007_market_tsm.sql    | market_items ⇄ TSM columns; provider_state PK fix           |
 
 `PRAGMA user_version` = schema version. Runner backs up DB before destructive
 migrations (Phase 9 backup behavior; no destructive migrations shipped yet).
@@ -34,12 +35,14 @@ migrations (Phase 9 backup behavior; no destructive migrations shipped yet).
 - `saved_routes(id TEXT PK, name, zone_id FK, resource_ids_json, waypoints_json
   [{x,y,cluster_id,value}], config_json, stats_json, created_at, updated_at)`
 - `market_items(item_id INT PK, region TEXT, market_value INT, min_buyout INT,
-  historical INT, sale_avg INT, sale_rate REAL, quantity INT,
-  market_updated_at INT, region_updated_at INT, fetched_at INT, provider TEXT)`
+  recent INT, historical INT, avg_sale_price INT, sale_rate REAL,
+  sold_per_day REAL, item_name TEXT, market_updated_at INT, region_updated_at INT,
+  fetched_at INT, provider TEXT)` (v7 TSM alignment)
 - `market_refresh(id INTEGER PK, provider, region, dataset, started_at, finished_at,
-  status TEXT, rows INT, error TEXT NULL)`
-- `provider_state(provider TEXT PK, dataset TEXT, last_success_at INT NULL,
-  last_attempt_at INT, last_error TEXT NULL, failures INT, next_retry_at INT)`
+  status TEXT, rows_total INT, rows_upserted INT, rows_skipped INT, error TEXT NULL)`
+- `provider_state(provider TEXT, dataset TEXT, last_success_at INT NULL,
+  last_attempt_at INT, last_error TEXT NULL, failures INT, next_retry_at INT;
+  PK(provider, dataset))`
 - `farm_sessions(id TEXT PK, external_id TEXT NULL, character_name, realm,
   zone_id NULL, route_id NULL, status TEXT, started_at INT, ended_at INT NULL,
   active_seconds INT, expected_gph INT NULL, notes TEXT)`

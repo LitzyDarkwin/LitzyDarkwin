@@ -37,4 +37,4 @@ pub mod storage;
 /// Current addon SavedVariables schema supported by the bridge.
 pub const ADDON_SCHEMA_VERSION: u32 = 1;
 /// Current SQLite schema version (mirrors number of migrations).
-pub const SCHEMA_VERSION: u32 = 6;
+pub const SCHEMA_VERSION: u32 = 7;

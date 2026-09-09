@@ -19,6 +19,13 @@ import type {
 } from '../types/domain';
 import { MOCK_TREE, mockObservations, mockSearch, mockZoneDetail } from './atlas-data';
 import { MOCK_CANDIDATES, MOCK_ROUTE_CONFIG, mockSavedRoute } from './routes-data';
+import {
+  MOCK_MARKET_STATUS,
+  mockMarketPrices,
+  mockRefresh,
+  mockSearchItems,
+  mockValuation,
+} from './market-data';
 
 type Handler = (args?: Record<string, unknown>) => unknown;
 
@@ -281,6 +288,18 @@ const handlers: Record<string, Handler> = {
       waypointCount: found.waypoints.length,
     };
   },
+
+  refresh_market: () => mockRefresh(),
+
+  get_market_status: () => MOCK_MARKET_STATUS,
+
+  get_item_valuation: (args) => mockValuation(Number(args?.itemId ?? 0)),
+
+  search_market_items: (args) =>
+    mockSearchItems(String(args?.query ?? ''), Number(args?.limit ?? 25)),
+
+  get_market_prices: (args) =>
+    mockMarketPrices(((args?.resourceIds as string[] | undefined) ?? []) as string[]),
 };
 
 export function hasMock(cmd: string): boolean {
