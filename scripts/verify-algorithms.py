@@ -559,6 +559,46 @@ def verify_session(fx: dict) -> None:
         check(f"session[{cid}].expectedTotal", exp_total, ex["expectedTotal"], 1e-9)
 
 
+# --- blending (ALGORITHMS.md §7) -------------------------------------------------------
+
+
+def py_decay(age_seconds: int, half_life_days: float) -> float:
+    if half_life_days <= 0.0:
+        return 0.0
+    return 0.5 ** (max(age_seconds, 0) / (half_life_days * 86400.0))
+
+
+def verify_blend(fx: dict) -> None:
+    for case in fx["cases"]:
+        cid, kind = case["id"], case["kind"]
+        if kind == "decay":
+            got = py_decay(case["ageSeconds"], case["halfLifeDays"])
+            check(f"blend[{cid}]", got, case["expect"], 1e-9)
+        elif kind == "weight":
+            got = min(max(case["samples"], 0.0) / max(case["minSamples"], 1e-9), 1.0) * py_decay(
+                case["ageSeconds"], case["halfLifeDays"])
+            check(f"blend[{cid}]", got, case["expect"], 1e-9)
+        elif kind == "blend":
+            num = case["prior"] * case["priorWeight"]
+            den = case["priorWeight"]
+            pw = 0.0
+            for leg in ["personal", "crowd"]:
+                ev = case[leg]
+                if ev is not None and ev["weight"] > 0.0:
+                    num += ev["value"] * ev["weight"]
+                    den += ev["weight"]
+                    if leg == "personal":
+                        pw = ev["weight"]
+            value = num / den if den > 0.0 else case["prior"]
+            ex = case["expect"]
+            check(f"blend[{cid}].value", value, ex["value"], 1e-9)
+            check(f"blend[{cid}].weight", pw, ex["weight"], 1e-9)
+            check_eq(f"blend[{cid}].used", pw > 0.0, ex["used"])
+        else:
+            print(f"FAIL: blend[{cid}] unknown kind {kind!r}")
+            sys.exit(1)
+
+
 VERIFIERS = {
     "geo.json": verify_geo,
     "cluster.json": verify_cluster,
@@ -566,6 +606,7 @@ VERIFIERS = {
     "go1.json": verify_go1,
     "valuation.json": verify_valuation,
     "session.json": verify_session,
+    "blend.json": verify_blend,
 }
 
 

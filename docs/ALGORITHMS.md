@@ -110,6 +110,16 @@ crowd_w    = agreement × diversity × recency × min(contributors/crowd_min, 1)
 
 Personal always wins with enough evidence. Decay half-life configurable (default 21 days).
 
+Phase 7 implementation notes (`intelligence.rs`): learning is a deterministic
+full rebuild over `analyzed` sessions (uniform sums in SQL; recency decay
+applies at read time via `updated_at`, so stored stats never drift). Yield
+pools every analyzed session (zero-gather loot excluded); zone GPH pools
+linked + unlinked sessions, but efficiency compares linked sessions against
+their own expectations only — unknown zones stay neutral 1.0. Personalized
+routes blend observation yields, then scale effective/GPH/bands by zone
+efficiency while gross stays the unadjusted model reference. `hit_rate` is
+reserved: the addon reports no attempts, so nothing is learned there.
+
 ## 8. Opportunity score (recommendations)
 
 ```text

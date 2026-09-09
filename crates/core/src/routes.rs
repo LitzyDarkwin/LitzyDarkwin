@@ -604,6 +604,17 @@ pub struct RouteStats {
     pub warnings: Vec<String>,
 }
 
+/// Personalization applied to a candidate (Phase 7). `None` = plain priors.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PersonalAdjustment {
+    pub efficiency: f64,
+    pub efficiency_zone: Option<String>,
+    pub yields_blended: usize,
+    pub observations: usize,
+    pub explain: Vec<String>,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CandidateDto {
@@ -612,6 +623,7 @@ pub struct CandidateDto {
     pub stats: RouteStats,
     /// Effective config (post-defaults, post-clamp) so saves reproduce exactly.
     pub config: RouteConfig,
+    pub personal: Option<PersonalAdjustment>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -742,7 +754,21 @@ pub fn generate(
     if obs.is_empty() {
         return Err(AppError::route("no observations for this zone/resources (exclusions may cover everything)"));
     }
-    let clustered = cluster_observations(&obs, config);
+    generate_from_observations(&obs, ypu, config, prices)
+}
+
+/// Pure optimize→simulate→rank over caller-supplied observations (the seam
+/// personalization uses after adjusting yields).
+pub fn generate_from_observations(
+    obs: &[RouteObservation],
+    ypu: f64,
+    config: &RouteConfig,
+    prices: &HashMap<String, i64>,
+) -> Result<Vec<CandidateDto>> {
+    if obs.is_empty() {
+        return Err(AppError::route("no observations to cluster"));
+    }
+    let clustered = cluster_observations(obs, config);
     let built = build_candidates(&clustered.clusters, config, ypu)?;
     let mut dtos = Vec::new();
     for (rank, cand) in built.candidates.into_iter().take(3).enumerate() {
@@ -768,6 +794,7 @@ pub fn generate(
             rank: rank + 1,
             waypoints,
             config: config.clone(),
+            personal: None,
             stats: RouteStats {
                 loop_yards: cand.loop_yards,
                 loop_seconds: cand.loop_seconds,
@@ -1386,8 +1413,33 @@ mod tests {
         let v: serde_json::Value = serde_json::from_str(&text).unwrap();
         let zone = &v["zone"];
         let zone_id = zone["id"].as_str().unwrap();
+        // Parent rows first: tests run with FK enforcement ON and NOT NULL parents.
         conn.execute(
-            "INSERT INTO zones (id, name, map_id, yards_per_unit) VALUES (?1, ?2, ?3, ?4)",
+            "INSERT INTO expansions (id, name, short) VALUES ('expansion-test', 'Test', 'T')",
+            rusqlite::params![],
+        )
+        .unwrap();
+        conn.execute(
+            "INSERT INTO continents (id, expansion_id, name)
+             VALUES ('continent-test', 'expansion-test', 'Test Continent')",
+            rusqlite::params![],
+        )
+        .unwrap();
+        conn.execute(
+            "INSERT INTO farm_categories (id, key, name) VALUES ('cat-test', 'test', 'Test')",
+            rusqlite::params![],
+        )
+        .unwrap();
+        for res in ["ore-test", "herb-test"] {
+            conn.execute(
+                "INSERT INTO resources (id, category_id, key, name) VALUES (?1, 'cat-test', ?1, ?1)",
+                rusqlite::params![res],
+            )
+            .unwrap();
+        }
+        conn.execute(
+            "INSERT INTO zones (id, continent_id, name, map_id, yards_per_unit)
+             VALUES (?1, 'continent-test', ?2, ?3, ?4)",
             rusqlite::params![
                 zone_id,
                 zone["name"].as_str().unwrap(),

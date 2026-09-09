@@ -9,8 +9,8 @@ use std::path::{Path, PathBuf};
 use std::sync::{Mutex, MutexGuard};
 use tauri::{Manager, State};
 use wowgoldfarm_core::{
-    atlas, bridge, diagnostics, market, migrations, models, routes, seed, sessions, settings,
-    storage,
+    atlas, bridge, diagnostics, intelligence, market, migrations, models, routes, seed, sessions,
+    settings, storage,
 };
 
 /// Shared application state: one SQLite connection behind a mutex (rusqlite
@@ -457,6 +457,49 @@ fn get_session_stats(
         .map_err(user_err)
 }
 
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn get_personal_profile(
+    state: State<'_, AppState>,
+) -> Result<intelligence::PersonalProfile, String> {
+    let db = lock_db(&state)?;
+    intelligence::get_profile(&db).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn rebuild_personal(
+    state: State<'_, AppState>,
+) -> Result<intelligence::RebuildReport, String> {
+    let db = lock_db(&state)?;
+    intelligence::rebuild_personal(&db, models::now_unix()).map_err(user_err)
+}
+
+#[tauri::command]
+#[allow(clippy::needless_pass_by_value)] // Tauri commands take owned args.
+fn generate_personalized_routes(
+    state: State<'_, AppState>,
+    zone_id: String,
+    resource_ids: Vec<String>,
+    config: routes::RouteConfigDto,
+    prices: HashMap<String, i64>,
+    excluded: Vec<routes::ExcludedArea>,
+) -> Result<Vec<routes::CandidateDto>, String> {
+    let db = lock_db(&state)?;
+    let cfg = config.into_config();
+    intelligence::generate_personalized(
+        &db,
+        &zone_id,
+        &resource_ids,
+        &cfg,
+        &prices,
+        &excluded,
+        &intelligence::BlendConfig::default(),
+        models::now_unix(),
+    )
+    .map_err(user_err)
+}
+
 fn init_logging(app_dir: &std::path::Path) {
     // Dev: stderr. Prod file log is added in Phase 9 diagnostics work.
     let _ = app_dir;
@@ -532,7 +575,10 @@ pub fn run() {
             get_session,
             link_session_route,
             analyze_session,
-            get_session_stats
+            get_session_stats,
+            get_personal_profile,
+            rebuild_personal,
+            generate_personalized_routes
         ])
         .run(tauri::generate_context!())
         // Process entry point: nothing recoverable to do if the runtime fails.

@@ -15,6 +15,7 @@ const MIGRATIONS: &[(u32, &str, &str)] = &[
     (5, "0005_intelligence", include_str!("../migrations/0005_intelligence.sql")),
     (6, "0006_crowd", include_str!("../migrations/0006_crowd.sql")),
     (7, "0007_market_tsm", include_str!("../migrations/0007_market_tsm.sql")),
+    (8, "0008_session_gathers", include_str!("../migrations/0008_session_gathers.sql")),
 ];
 
 /// Latest schema version supported by this build.

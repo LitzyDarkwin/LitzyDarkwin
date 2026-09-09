@@ -25,6 +25,22 @@ export function generateRoutes(
   });
 }
 
+export function generatePersonalizedRoutes(
+  zoneId: string,
+  resourceIds: string[],
+  config: RouteConfigDto = {},
+  prices: Record<string, number> = {},
+  excluded: ExcludedArea[] = [],
+): Promise<RouteCandidate[]> {
+  return invokeSafe<RouteCandidate[]>('generate_personalized_routes', {
+    zoneId,
+    resourceIds,
+    config,
+    prices,
+    excluded,
+  });
+}
+
 export function saveRoute(input: SaveRouteInput): Promise<SavedRoute> {
   return invokeSafe<SavedRoute>('save_route', { input });
 }

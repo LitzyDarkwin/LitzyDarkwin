@@ -268,12 +268,22 @@ export interface RouteStats {
   warnings: string[];
 }
 
+export interface PersonalAdjustment {
+  efficiency: number;
+  efficiencyZone: string | null;
+  yieldsBlended: number;
+  observations: number;
+  explain: string[];
+}
+
 export interface RouteCandidate {
   rank: number;
   waypoints: Waypoint[];
   stats: RouteStats;
   /** Effective config (post-defaults, post-clamp) so saves reproduce exactly. */
   config: RouteConfig;
+  /** Present only on personalized candidates; null = plain priors. */
+  personal: PersonalAdjustment | null;
 }
 
 export interface SavedRoute {
@@ -441,4 +451,43 @@ export interface SessionStats {
   nowPartial: boolean;
   byDay: DayBucket[];
   byResource: ResourceBucket[];
+}
+
+export interface MetricEntry {
+  key: string;
+  value: number;
+  samples: number;
+  updatedAt: number;
+}
+
+export interface PersonalZoneEntry {
+  zoneId: string;
+  zoneName: string | null;
+  sessions: number;
+  totalSeconds: number;
+  avgGph: number;
+  efficiency: number;
+  updatedAt: number;
+}
+
+export interface PersonalResourceEntry {
+  resourceId: string;
+  resourceName: string | null;
+  gathers: number;
+  totalQty: number;
+  avgYield: number;
+  avgGoldPerGather: number;
+  updatedAt: number;
+}
+
+export interface PersonalProfile {
+  metrics: MetricEntry[];
+  zones: PersonalZoneEntry[];
+  resources: PersonalResourceEntry[];
+}
+
+export interface RebuildReport {
+  sessions: number;
+  resources: number;
+  zones: number;
 }

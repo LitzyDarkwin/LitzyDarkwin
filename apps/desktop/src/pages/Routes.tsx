@@ -15,6 +15,7 @@ import {
   compareRoutes,
   deleteRoute,
   exportRouteString,
+  generatePersonalizedRoutes,
   generateRoutes,
   getRoute,
   listRoutes,
@@ -78,6 +79,7 @@ export default function RoutesPage() {
   const [activeRank, setActiveRank] = useState(1);
   const [generating, setGenerating] = useState(false);
   const [genError, setGenError] = useState<string | null>(null);
+  const [personalize, setPersonalize] = useState(false);
 
   // Exclusions ---------------------------------------------------------------
   const [excluded, setExcluded] = useState<ExcludedArea[]>([]);
@@ -227,7 +229,8 @@ export default function RoutesPage() {
     }
     setGenerating(true);
     try {
-      const result = await generateRoutes(zoneId, selected, config, copper, excluded);
+      const generate = personalize ? generatePersonalizedRoutes : generateRoutes;
+      const result = await generate(zoneId, selected, config, copper, excluded);
       setCandidates(result);
       setActiveRank(result[0]?.rank ?? 1);
     } catch (e: unknown) {
@@ -436,6 +439,18 @@ export default function RoutesPage() {
               </div>
             </div>
           </div>
+          <div className="field checkrow">
+            <input
+              id="personalize"
+              data-testid="personalize-check"
+              type="checkbox"
+              checked={personalize}
+              onChange={(e) => setPersonalize(e.target.checked)}
+            />
+            <label htmlFor="personalize">
+              Personalize with my stats (yields + zone efficiency)
+            </label>
+          </div>
           <div className="btn-row">
             <button
               type="button"
@@ -490,6 +505,18 @@ export default function RoutesPage() {
                     <li key={i}>{w}</li>
                   ))}
                 </ul>
+              )}
+              {c.personal && (
+                <div className="personal-block" data-testid={`personal-${c.rank}`}>
+                  <span className="chip" title={c.personal.efficiencyZone ?? undefined}>
+                    Personal ×{c.personal.efficiency.toFixed(2)}
+                  </span>
+                  <ul className="explain-list">
+                    {c.personal.explain.map((line, i) => (
+                      <li key={i}>{line}</li>
+                    ))}
+                  </ul>
+                </div>
               )}
             </article>
           ))}

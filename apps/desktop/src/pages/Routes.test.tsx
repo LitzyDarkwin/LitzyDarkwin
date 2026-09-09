@@ -54,6 +54,23 @@ describe('Routes page (mock backend)', () => {
     expect(screen.getByTestId('map-waypoint-0')).toBeDefined();
   });
 
+  it('shows no personal block for plain candidates', async () => {
+    await generateWithPrices();
+    expect(screen.queryByTestId('personal-1')).toBeNull();
+  });
+
+  it('personalizes candidates with explain lines when enabled', async () => {
+    renderRoutes('/routes?zone=isle-of-dorn&resources=bismuth,mycobloom');
+    await screen.findByTestId('resource-bismuth');
+    fireEvent.change(screen.getByTestId('price-bismuth'), { target: { value: '5' } });
+    fireEvent.change(screen.getByTestId('price-mycobloom'), { target: { value: '12' } });
+    fireEvent.click(screen.getByTestId('personalize-check'));
+    fireEvent.click(screen.getByTestId('generate-btn'));
+    const block = await screen.findByTestId('personal-1');
+    expect(within(block).getByText(/Personal ×0\.85/)).toBeDefined();
+    expect(within(block).getByText(/bismuth: yield/)).toBeDefined();
+  });
+
   it('adds and removes map exclusions', async () => {
     await generateWithPrices();
     const svg = screen.getByTestId('route-map');

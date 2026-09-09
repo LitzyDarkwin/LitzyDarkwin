@@ -657,8 +657,19 @@ mod tests {
     fn seeded_db() -> Connection {
         let conn = mem_db();
         conn.execute(
-            "INSERT INTO zones (id, name, map_id, yards_per_unit)
-             VALUES ('zone-test', 'Test Zone', 1, 10.0)",
+            "INSERT INTO expansions (id, name, short) VALUES ('expansion-test', 'Test', 'T')",
+            rusqlite::params![],
+        )
+        .unwrap();
+        conn.execute(
+            "INSERT INTO continents (id, expansion_id, name)
+             VALUES ('continent-test', 'expansion-test', 'Test Continent')",
+            rusqlite::params![],
+        )
+        .unwrap();
+        conn.execute(
+            "INSERT INTO zones (id, continent_id, name, map_id, yards_per_unit)
+             VALUES ('zone-test', 'continent-test', 'Test Zone', 1, 10.0)",
             rusqlite::params![],
         )
         .unwrap();

@@ -248,8 +248,8 @@ fn upsert_session(
         )
         .optional()?;
 
-    // Aggregate gathers by item id.
-    let mut items: std::collections::BTreeMap<i64, (f64, String)> = Default::default();
+    // Aggregate gathers by item id (qty + event count for yield learning).
+    let mut items: std::collections::BTreeMap<i64, (f64, String, i64)> = Default::default();
     for g in as_sequence(s.get("gathers").unwrap_or(&serde_json::Value::Null)) {
         let item = i64_field(g, "itemID").unwrap_or(UNKNOWN_ITEM_ID);
         let qty = f64_field(g, "qty").unwrap_or(1.0).max(0.0);
@@ -259,8 +259,9 @@ fn upsert_session(
             str_field(g, "name").as_deref(),
             str_field(g, "cat").as_deref(),
         )?;
-        let entry = items.entry(item).or_insert((0.0, resource));
+        let entry = items.entry(item).or_insert((0.0, resource, 0));
         entry.0 += qty;
+        entry.2 += 1;
     }
 
     match existing {
@@ -292,11 +293,11 @@ fn upsert_session(
             return Ok(());
         }
     }
-    for (item_id, (qty, resource_id)) in &items {
+    for (item_id, (qty, resource_id, gathers)) in &items {
         conn.execute(
-            "INSERT INTO farm_session_items (session_id, item_id, resource_id, qty)
-             VALUES (?1, ?2, ?3, ?4)",
-            rusqlite::params![external_id, item_id, resource_id, qty],
+            "INSERT INTO farm_session_items (session_id, item_id, resource_id, qty, gathers)
+             VALUES (?1, ?2, ?3, ?4, ?5)",
+            rusqlite::params![external_id, item_id, resource_id, qty, gathers],
         )?;
     }
     // Snapshot market prices for the imported loot (first snapshot wins).
@@ -464,6 +465,8 @@ pub fn sync_from_addon(
         &newest_export.map(serde_json::Value::from).unwrap_or(serde_json::Value::Null),
         now,
     )?;
+    // Learned stats follow the fresh sessions (same transaction, full rebuild).
+    crate::intelligence::rebuild_personal(&tx, now)?;
     tx.commit()?;
     Ok(report)
 }

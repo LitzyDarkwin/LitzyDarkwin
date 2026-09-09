@@ -1,0 +1,101 @@
+{
+  "note": "All expects hand-verifiable: decay halves per 21d; blend is the \u00a77 weighted mean.",
+  "cases": [
+    {
+      "id": "decay-fresh",
+      "kind": "decay",
+      "ageSeconds": 0,
+      "halfLifeDays": 21.0,
+      "expect": 1.0
+    },
+    {
+      "id": "decay-half",
+      "kind": "decay",
+      "ageSeconds": 1814400,
+      "halfLifeDays": 21.0,
+      "expect": 0.5
+    },
+    {
+      "id": "decay-quarter",
+      "kind": "decay",
+      "ageSeconds": 3628800,
+      "halfLifeDays": 21.0,
+      "expect": 0.25
+    },
+    {
+      "id": "weight-capped",
+      "kind": "weight",
+      "samples": 20,
+      "minSamples": 10,
+      "ageSeconds": 0,
+      "halfLifeDays": 21.0,
+      "expect": 1.0
+    },
+    {
+      "id": "weight-partial",
+      "kind": "weight",
+      "samples": 5,
+      "minSamples": 10,
+      "ageSeconds": 0,
+      "halfLifeDays": 21.0,
+      "expect": 0.5
+    },
+    {
+      "id": "weight-decayed",
+      "kind": "weight",
+      "samples": 5,
+      "minSamples": 10,
+      "ageSeconds": 1814400,
+      "halfLifeDays": 21.0,
+      "expect": 0.25
+    },
+    {
+      "id": "blend-personal",
+      "kind": "blend",
+      "prior": 2.0,
+      "personal": {
+        "value": 2.5,
+        "weight": 0.5
+      },
+      "crowd": null,
+      "priorWeight": 1.0,
+      "expect": {
+        "value": 2.1666666666666665,
+        "weight": 0.5,
+        "used": true
+      }
+    },
+    {
+      "id": "blend-prior-only",
+      "kind": "blend",
+      "prior": 2.0,
+      "personal": null,
+      "crowd": null,
+      "priorWeight": 1.0,
+      "expect": {
+        "value": 2.0,
+        "weight": 0.0,
+        "used": false
+      }
+    },
+    {
+      "id": "blend-crowd",
+      "kind": "blend",
+      "prior": 2.0,
+      "personal": {
+        "value": 2.5,
+        "weight": 0.5
+      },
+      "crowd": {
+        "value": 3.0,
+        "weight": 0.35
+      },
+      "priorWeight": 1.0,
+      "expect": {
+        "value": 2.324324324324324,
+        "weight": 0.5,
+        "used": true
+      }
+    }
+  ]
+}

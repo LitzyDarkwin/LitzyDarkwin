@@ -28,6 +28,11 @@ import {
   mockValuation,
 } from './market-data';
 import { mockSessionDetails, mockSessionStats, refreshDetail, toSummary } from './sessions-data';
+import {
+  MOCK_PERSONAL_CANDIDATES,
+  MOCK_PROFILE,
+  MOCK_REBUILD_REPORT,
+} from './intelligence-data';
 
 type Handler = (args?: Record<string, unknown>) => unknown;
 
@@ -368,6 +373,22 @@ const handlers: Record<string, Handler> = {
           (since == null || d.summary.startedAt >= since),
       ),
     );
+  },
+
+  get_personal_profile: () => MOCK_PROFILE,
+
+  rebuild_personal: () => MOCK_REBUILD_REPORT,
+
+  generate_personalized_routes: (args) => {
+    const resourceIds = ((args?.resourceIds as string[] | undefined) ?? []) as string[];
+    if (resourceIds.length === 0) throw new Error('select at least one resource');
+    const prices = ((args?.prices as Record<string, number> | undefined) ?? {}) as Record<
+      string,
+      number
+    >;
+    const missing = resourceIds.filter((id) => !(id in prices));
+    if (missing.length > 0) throw new Error(`missing prices for: ${missing.join(', ')}`);
+    return MOCK_PERSONAL_CANDIDATES;
   },
 };
 

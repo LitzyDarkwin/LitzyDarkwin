@@ -51,6 +51,7 @@ export const MOCK_CANDIDATES: RouteCandidate[] = [
   {
     rank: 1,
     config: MOCK_ROUTE_CONFIG,
+    personal: null,
     waypoints: [
       wp(30, 62, 'c0', 420_000),
       wp(44, 55, 'c1', 380_000),
@@ -62,6 +63,7 @@ export const MOCK_CANDIDATES: RouteCandidate[] = [
   {
     rank: 2,
     config: MOCK_ROUTE_CONFIG,
+    personal: null,
     waypoints: [
       wp(30, 62, 'c0', 420_000),
       wp(58, 60, 'c2', 360_000),
