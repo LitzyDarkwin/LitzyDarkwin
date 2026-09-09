@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Hub — Tüm ücretsiz yapay zekalar tek yerde</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<div id="app">
+  <!-- SOL: sohbet geçmişi -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <span class="logo">✦</span>
+      <div><b>AI Hub</b><small>ücretsiz modeller</small></div>
+    </div>
+    <button class="new-chat" id="newChat">＋ Yeni sohbet</button>
+    <input class="search" id="searchChats" placeholder="Geçmişte ara…" />
+    <div class="history" id="history"></div>
+    <div class="sidebar-foot">
+      <button class="ghost" id="openKeys">🔑 Hesaplar & Anahtarlar</button>
+      <button class="ghost" id="exportBtn">⭳ Dışa aktar</button>
+    </div>
+  </aside>
+
+  <!-- ORTA: sohbet -->
+  <main class="main">
+    <header class="topbar">
+      <button class="icon-btn only-mobile" id="menuBtn">☰</button>
+      <button class="model-picker" id="modelPicker">
+        <span class="dot" id="pickerDot"></span>
+        <span id="pickerLabel">Model seç</span>
+        <span class="caret">▾</span>
+      </button>
+      <div class="spacer"></div>
+      <div class="quota-pill" id="quotaPill" title="Tahmini kalan kota">–</div>
+      <button class="icon-btn" id="panelBtn" title="Kota paneli">📊</button>
+    </header>
+
+    <section class="chat" id="chat">
+      <div class="welcome" id="welcome">
+        <h1>Tek arayüz, <span>onlarca</span> ücretsiz yapay zeka</h1>
+        <p>Gemini, Groq, OpenRouter, Mistral, Cerebras, GitHub Models, DeepSeek ve daha fazlası. Anahtarların yalnızca senin tarayıcında saklanır.</p>
+        <div class="chips" id="quickChips"></div>
+      </div>
+    </section>
+
+    <footer class="composer">
+      <div class="composer-box">
+        <textarea id="input" rows="1" placeholder="Bir şeyler sor…  (Enter: gönder · Shift+Enter: satır)"></textarea>
+        <button id="send" class="send" title="Gönder">➤</button>
+      </div>
+      <div class="composer-meta" id="composerMeta"></div>
+    </footer>
+  </main>
+
+  <!-- SAĞ: kota paneli -->
+  <aside class="panel" id="panel">
+    <div class="panel-head"><b>Kota durumu</b><button class="icon-btn" id="closePanel">✕</button></div>
+    <div class="panel-body" id="panelBody"></div>
+    <div class="panel-foot">Sayımlar bu cihazdaki kullanımına göre tahminidir. Resmî kalan kota için sağlayıcının panosuna bak.</div>
+  </aside>
+</div>
+
+<!-- Model seçici modal -->
+<div class="modal" id="modelModal" hidden>
+  <div class="modal-card wide">
+    <div class="modal-head">
+      <b>Model seç</b>
+      <input id="modelSearch" placeholder="Model veya sağlayıcı ara…" />
+      <button class="icon-btn" data-close>✕</button>
+    </div>
+    <div class="modal-body" id="modelList"></div>
+  </div>
+</div>
+
+<!-- Anahtar/giriş modal -->
+<div class="modal" id="keyModal" hidden>
+  <div class="modal-card">
+    <div class="modal-head"><b>Hesaplar & API anahtarları</b><button class="icon-btn" data-close>✕</button></div>
+    <div class="modal-body" id="keyList"></div>
+    <div class="modal-foot">Anahtarlar yalnızca tarayıcının <code>localStorage</code>'ında tutulur, sunucuya sadece istek anında iletilir.</div>
+  </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+<script type="module" src="/app.js"></script>
+</body>
+</html>
