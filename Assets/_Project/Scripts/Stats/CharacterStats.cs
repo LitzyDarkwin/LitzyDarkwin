@@ -28,8 +28,10 @@ namespace Roguelite.Stats
         [SerializeField] private bool broadcastChanges;
 
         private static readonly int StatCount = ComputeStatCount();
-        private Stat[] _stats;
-        private bool _initialized;
+        // NonSerialized: Unity editörde script yeniden yüklenirken private alanları da yedekler;
+        // bayrak "hazır" kalıp dizi boşalmasın diye ikisi de yedeklenmez.
+        [NonSerialized] private Stat[] _stats;
+        [NonSerialized] private bool _initialized;
 
         /// <summary>Yerel dinleyiciler için (aynı GameObject). Sadece broadcastChanges açıkken tetiklenir.</summary>
         public event Action<StatType, float, float> StatChanged;
@@ -40,7 +42,7 @@ namespace Roguelite.Stats
 
         private void Awake()
         {
-            if (!_initialized) Initialize(baseSheet);
+            if (!_initialized || _stats == null) Initialize(baseSheet);
         }
 
         /// <summary>
@@ -75,13 +77,16 @@ namespace Roguelite.Stats
                 }
             }
 
+            // Bundan sonra Get/AddModifier güvenle çağrılabilir (meta profili AddModifier kullanır -> sonsuz döngü olmasın)
+            _initialized = true;
+
             if (sheet != null)
             {
                 IReadOnlyList<StatSheetSO.Entry> entries = sheet.Entries;
                 for (int i = 0; i < entries.Count; i++)
                 {
                     StatSheetSO.Entry e = entries[i];
-                    Stat stat = Get(e.Stat);
+                    Stat stat = _stats[(int)e.Stat];
                     if (e.OverrideLimits) stat.SetLimits(e.Min, e.Max);
                     stat.BaseValue = e.BaseValue;
                 }
@@ -89,13 +94,11 @@ namespace Roguelite.Stats
 
             if (metaProgression != null)
                 metaProgression.ApplyTo(this);
-
-            _initialized = true;
         }
 
         public Stat Get(StatType type)
         {
-            if (!_initialized) Initialize(baseSheet);
+            if (!_initialized || _stats == null) Initialize(baseSheet);
             return _stats[(int)type];
         }
 
@@ -119,7 +122,7 @@ namespace Roguelite.Stats
         /// <summary>Source'a ait her şeyi tüm statlardan kaldırır (eşya satıldı, buff bitti, sinerji kırıldı).</summary>
         public int RemoveAllModifiersFromSource(object source)
         {
-            if (!_initialized) return 0;
+            if (!_initialized || _stats == null) return 0;
             int total = 0;
             for (int i = 0; i < _stats.Length; i++)
                 total += _stats[i].RemoveAllModifiersFromSource(source);
@@ -150,7 +153,7 @@ namespace Roguelite.Stats
         [ContextMenu("Debug/Log All Stats")]
         private void LogAllStats()
         {
-            if (!_initialized) Initialize(baseSheet);
+            if (!_initialized || _stats == null) Initialize(baseSheet);
             var sb = new System.Text.StringBuilder($"[{name}] Stats\n");
             for (int i = 0; i < _stats.Length; i++) sb.AppendLine(_stats[i].ToString());
             Debug.Log(sb.ToString(), this);
