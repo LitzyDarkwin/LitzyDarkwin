@@ -145,7 +145,7 @@ namespace Roguelite.Controls
                 Output = (offset / distance) * remapped;
             }
 
-            inputChannel.SetTouchMove(Output);
+            if (inputChannel != null) inputChannel.SetTouchMove(Output);
         }
 
         private void ResetStick()

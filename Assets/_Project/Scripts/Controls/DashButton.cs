@@ -53,7 +53,7 @@ namespace Roguelite.Controls
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            inputChannel.RequestDash();
+            if (inputChannel != null) inputChannel.RequestDash();
             _scale.AddDisplacementImpulse(pressPunch, scaleSpring);
         }
 

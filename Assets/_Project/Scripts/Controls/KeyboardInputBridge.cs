@@ -27,6 +27,7 @@ namespace Roguelite.Controls
 
         private void Update()
         {
+            if (inputChannel == null) return;
             Vector2 move = Vector2.zero;
             bool dash = false;
 

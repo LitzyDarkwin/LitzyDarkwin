@@ -45,6 +45,9 @@ namespace Roguelite.EditorTools
 
             try
             {
+                // ÖNCE sahneyi aç: NewScene (Single) kullanılmayan asset'leri bellekten atar; asset'leri bundan SONRA yükle.
+                Scene scene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
+
                 EditorUtility.DisplayProgressBar("Roguelite", "Klasörler ve katmanlar...", 0.1f);
                 EnsureFolder(ArtDir);
                 EnsureFolder(SoDir);
@@ -73,7 +76,13 @@ namespace Roguelite.EditorTools
                 GhostSprite ghostPrefab = CreateGhostPrefab(spriteMat);
 
                 EditorUtility.DisplayProgressBar("Roguelite", "Sahne kuruluyor...", 0.75f);
-                Scene scene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
+                AssetDatabase.SaveAssets();
+                // Diskten taze referans al (bellekten atılmış olma ihtimaline karşı)
+                inputChannel = AssetDatabase.LoadAssetAtPath<InputChannelSO>(SoDir + "/InputChannel.asset");
+                statSheet = AssetDatabase.LoadAssetAtPath<StatSheetSO>(SoDir + "/StatSheet_Player.asset");
+                ghostPrefab = AssetDatabase.LoadAssetAtPath<GhostSprite>(PrefabDir + "/GhostSprite.prefab");
+                if (inputChannel == null || statSheet == null || ghostPrefab == null)
+                    throw new InvalidOperationException("InputChannel / StatSheet / GhostSprite asset'leri oluşturulamadı.");
 
                 // ---------- Sistemler
                 var systems = new GameObject("[Systems]");
@@ -384,6 +393,8 @@ namespace Roguelite.EditorTools
             if (p == null) { Debug.LogWarning($"[Roguelite] {target.GetType().Name}.{field} bulunamadı"); return; }
             p.objectReferenceValue = value;
             so.ApplyModifiedPropertiesWithoutUndo();
+            if (value != null && new SerializedObject(target).FindProperty(field).objectReferenceValue == null)
+                Debug.LogError($"[Roguelite] {target.GetType().Name}.{field} atanamadı!", target);
         }
 
         private static void SetBool(Object target, string field, bool value)
