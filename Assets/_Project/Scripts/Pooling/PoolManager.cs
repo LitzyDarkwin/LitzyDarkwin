@@ -12,7 +12,7 @@ namespace Roguelite.Pooling
     ///   Bullet b  = PoolManager.Instance.Spawn(bulletPrefab, pos, rot);
     ///   PoolManager.Despawn(e);        // veya e.GetComponent&lt;PooledObject&gt;().Despawn();
     ///
-    /// Havuzlar prefab GameObject'inin InstanceID'si ile anahtarlanır; ilk Spawn'da havuz otomatik açılır.
+    /// Havuzlar prefab GameObject referansı ile anahtarlanır; ilk Spawn'da havuz otomatik açılır.
     /// "Presets" listesine eklenen prefab'lar Awake'te önceden üretilir (oyun içi Instantiate spike'ı = 0).
     /// </summary>
     [DefaultExecutionOrder(-1000)]
@@ -34,7 +34,7 @@ namespace Roguelite.Pooling
         [SerializeField, Min(1)] private int defaultMaxSize = 256;
 
         private static PoolManager _instance;
-        private readonly Dictionary<int, PrefabPool> _pools = new Dictionary<int, PrefabPool>(64);
+        private readonly Dictionary<GameObject, PrefabPool> _pools = new Dictionary<GameObject, PrefabPool>(64);
         private Transform _root;
 
         public static PoolManager Instance
@@ -116,22 +116,21 @@ namespace Roguelite.Pooling
         /// <summary>Debug / profil için: prefab başına aktif nesne sayısı.</summary>
         public int GetActiveCount(GameObject prefab)
         {
-            return _pools.TryGetValue(prefab.GetInstanceID(), out PrefabPool pool) ? pool.CountActive : 0;
+            return _pools.TryGetValue(prefab, out PrefabPool pool) ? pool.CountActive : 0;
         }
 
         // ------------------------------------------------------------------ İç
 
         private PrefabPool GetOrCreatePool(GameObject prefab, int maxSize)
         {
-            int key = prefab.GetInstanceID();
-            if (_pools.TryGetValue(key, out PrefabPool pool))
+            if (_pools.TryGetValue(prefab, out PrefabPool pool))
                 return pool;
 
             Transform container = new GameObject($"Pool_{prefab.name}").transform;
             container.SetParent(_root, false);
 
             pool = new PrefabPool(prefab, container, maxSize);
-            _pools.Add(key, pool);
+            _pools.Add(prefab, pool);
             return pool;
         }
     }

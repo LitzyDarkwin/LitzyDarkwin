@@ -3,6 +3,13 @@
 Gerekli paket yok. (DOTween opsiyonel; kullanmıyoruz, yaylar `Core/Utils/Spring.cs` ile yapılıyor.)
 `Assets/_Project` klasörünü projenin `Assets/` klasörüne kopyalaman yeterli.
 
+## ⚡ Hızlı Yol (önerilen): Tek Tıkla Kurulum
+1. `Assets/_Project` klasörünü projene kopyala, derlemenin bitmesini bekle.
+2. Üst menüden **Roguelite > Demo Sahnesini Kur**.
+3. **Play**. (Aşağıdaki manuel adımların hepsini bu menü yapar.)
+
+---
+
 ## 1. Katmanlar ve Fizik
 - **Project Settings > Tags and Layers**: `Player`, `Enemy`, `EnemyProjectile`, `Pickup` katmanlarını ekle.
 - **Physics 2D**: Gravity = (0, 0).

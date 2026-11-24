@@ -103,7 +103,7 @@ namespace Roguelite.Juice
         private void Reset() => colorOverLifetime = DefaultGradient();
 #endif
 
-        private static Gradient DefaultGradient()
+        public static Gradient DefaultGradient()
         {
             var g = new Gradient();
             g.SetKeys(
